@@ -21,8 +21,21 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextFormField(),
-            TextFormField(),
+            FlutterLogo(
+              size: 100,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              decoration:
+                  InputDecoration(hintText: 'abc@gmail.com', filled: true),
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: 'Your name',
+              ),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {},
