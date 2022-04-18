@@ -1,12 +1,14 @@
+import 'package:digital_marketing/dao/user.dart';
 import 'package:flutter/material.dart';
 
 class CourceItem extends StatelessWidget {
-  const CourceItem({Key? key}) : super(key: key);
+  final Cource cource;
+  const CourceItem({Key? key, required this.cource}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 340,
+      height: 300,
       width: 250,
       margin: const EdgeInsets.all(8),
       child: Column(
@@ -14,9 +16,7 @@ class CourceItem extends StatelessWidget {
           Stack(
             children: [
               Container(
-                child: Image.network(
-                  'https://media.istockphoto.com/photos/portrait-of-smiling-diverse-people-raising-hands-at-seminar-picture-id1342228491?b=1&k=20&m=1342228491&s=170667a&w=0&h=rZuhcq_sbRYQIVWFfsDdqFi6XeQwcwR8gs7ZIlTrVQ8=',
-                ),
+                child: Image.network(cource.image!),
               ),
               Container(
                 padding: const EdgeInsets.all(4),
@@ -24,18 +24,18 @@ class CourceItem extends StatelessWidget {
                   color: Colors.amber,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: const Text('Finance'),
+                child: Text(cource.cource_category!),
               )
             ],
           ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Share Market Xpert",
+              cource.title!,
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

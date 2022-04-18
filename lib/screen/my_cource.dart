@@ -18,6 +18,7 @@ class MyCource extends StatelessWidget {
       appBar: AppBar(
         title: Text('My Cource'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

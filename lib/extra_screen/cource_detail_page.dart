@@ -1,6 +1,11 @@
+import 'package:digital_marketing/widgets/video_item.dart';
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
-class CourceDetailPage extends StatelessWidget {
+String courceUrl =
+    'https://media.istockphoto.com/photos/portrait-of-smiling-diverse-people-raising-hands-at-seminar-picture-id1342228491?b=1&k=20&m=1342228491&s=170667a&w=0&h=rZuhcq_sbRYQIVWFfsDdqFi6XeQwcwR8gs7ZIlTrVQ8=';
+
+class CourceDetailPage extends StatefulWidget {
   static const routeName = 'cource_detail_page';
   const CourceDetailPage({Key? key}) : super(key: key);
   static MaterialPageRoute route() {
@@ -11,24 +16,139 @@ class CourceDetailPage extends StatelessWidget {
   }
 
   @override
+  State<CourceDetailPage> createState() => _CourceDetailPageState();
+}
+
+class _CourceDetailPageState extends State<CourceDetailPage> {
+  late VideoPlayerController _controller;
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.network(
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
+      ..initialize().then((_) {
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+        setState(() {});
+      });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Share Market Xpert'),
+        backgroundColor: Colors.transparent,
+        title: const Text('Cource Title'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.info),
+            tooltip: 'Cource Info',
+          )
+        ],
       ),
-      body: SingleChildScrollView(
+      body: Container(
         child: Column(
           children: [
-            CourceHeadingWidget(),
-            SizedBox(height: 15),
-            WhatYouLearnWidget(),
-            CourceDescription(),
-            CourceContent()
+            Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  height: 180,
+                  width: double.infinity,
+                  child: _controller.value.isInitialized
+                      ? AspectRatio(
+                          aspectRatio: _controller.value.aspectRatio,
+                          child: VideoPlayer(_controller),
+                        )
+                      : Container(
+                          height: 180,
+                          decoration: BoxDecoration(
+                            border: Border.all(),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                              child: IconButton(
+                            icon: const Icon(Icons.play_arrow),
+                            onPressed: () {},
+                          )),
+                        ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _controller.value.isPlaying
+                            ? _controller.pause()
+                            : _controller.play();
+                      });
+                    },
+                    icon: Icon(
+                      _controller.value.isPlaying
+                          ? Icons.pause
+                          : Icons.play_arrow,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            // IconButton(
+            //   onPressed: () {
+            //     setState(() {
+            //       _controller.value.isPlaying
+            //           ? _controller.pause()
+            //           : _controller.play();
+            //     });
+            //   },
+            //   icon: Icon(
+            //     _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+            //   ),
+            // ),
+            Flexible(
+              child: ListView(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                children: [
+                  CourceContent(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
+
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: const Text('Share Market Xpert'),
+    //     centerTitle: true,
+    //     bottom: TabBar(
+    //       tabs: [
+    //         Tab(
+    //           text: "Detail",
+    //         ),
+    //         Tab(
+    //           text: 'Learn',
+    //         )
+    //       ],
+    //     ),
+    //   ),
+    //   body: SingleChildScrollView(
+    //     child: Column(
+    //       children: [
+    //         CourceHeadingWidget(),
+    //         SizedBox(height: 15),
+    //         WhatYouLearnWidget(),
+    //         CourceDescription(),
+    //         CourceContent()
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 }
 
@@ -59,7 +179,7 @@ class CourceHeadingWidget extends StatelessWidget {
               height: 200,
               width: double.infinity,
               child: Image.network(
-                'https://media.istockphoto.com/photos/portrait-of-smiling-diverse-people-raising-hands-at-seminar-picture-id1342228491?b=1&k=20&m=1342228491&s=170667a&w=0&h=rZuhcq_sbRYQIVWFfsDdqFi6XeQwcwR8gs7ZIlTrVQ8=',
+                courceUrl,
                 fit: BoxFit.cover,
               ),
             ),
@@ -227,18 +347,39 @@ class CourceContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      childrenPadding: const EdgeInsets.symmetric(horizontal: 20),
-      title: Text(
-        'Cource Content',
-        style: Theme.of(context).textTheme.headline5,
-      ),
-      subtitle: CourceContentDurationTile(
-        sections: "1",
-        leactures: "39",
-        duration: "13Hr 26Min 58Sec",
-      ),
+    return Column(
+      // childrenPadding: const EdgeInsets.symmetric(horizontal: 20),
+      // title: Text(
+      //   'Cource Content',
+      //   style: Theme.of(context).textTheme.headline5,
+      // ),
+      // subtitle: CourceContentDurationTile(
+      //   sections: "1",
+      //   leactures: "39",
+      //   duration: "13Hr 26Min 58Sec",
+      // ),
       children: [
+        CourceContentVideoTile(
+            title: '1 Why Content Writing', duration: "17:45"),
+        CourceContentVideoTile(
+            title:
+                '2. Is Content Writing Only For The Creative People and Talented Writers',
+            duration: "08:39"),
+        CourceContentVideoTile(
+            title: ' 3. Difference Between Content Writing and Copywriting',
+            duration: "13:21"),
+        CourceContentVideoTile(
+            title: '1 Why Content Writing', duration: "17:45"),
+        CourceContentVideoTile(
+            title: '1 Why Content Writing', duration: "17:45"),
+        CourceContentVideoTile(
+            title: '1 Why Content Writing', duration: "17:45"),
+        CourceContentVideoTile(
+            title: '1 Why Content Writing', duration: "17:45"),
+        CourceContentVideoTile(
+            title: '1 Why Content Writing', duration: "17:45"),
+        CourceContentVideoTile(
+            title: '1 Why Content Writing', duration: "17:45"),
         CourceContentVideoTile(
             title: '1 Why Content Writing', duration: "17:45"),
         CourceContentVideoTile(
@@ -299,35 +440,42 @@ class CourceContentVideoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        children: [
-          Flexible(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.play_arrow,
-                  color: Colors.grey,
-                ),
-                SizedBox(width: 5),
-                Flexible(
-                  child: Text(
-                    title,
-                    style: Theme.of(context).textTheme.bodyText1,
-                    overflow: TextOverflow.visible,
+    return InkWell(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (_) {
+          return VideoItem();
+        }));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        child: Row(
+          children: [
+            Flexible(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.play_arrow,
+                    color: Colors.grey,
                   ),
-                )
+                  SizedBox(width: 5),
+                  Flexible(
+                    child: Text(
+                      title,
+                      style: Theme.of(context).textTheme.bodyText1,
+                      overflow: TextOverflow.visible,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                Text(duration),
               ],
             ),
-          ),
-          Row(
-            children: [
-              Text(duration),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -19,8 +19,9 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Profile'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+      bottomNavigationBar: const CustomNavBar(),
       body: Align(
         alignment: Alignment.center,
         child: Column(
@@ -28,16 +29,49 @@ class ProfilePage extends StatelessWidget {
           children: [
             Column(
               children: [
-                CircleAvatar(
-                  minRadius: 40,
-                  maxRadius: 60,
-                  backgroundImage: NetworkImage(
-                      "https://randomuser.me/api/portraits/men/47.jpg"),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        minRadius: 40,
+                        maxRadius: 60,
+                        backgroundImage: NetworkImage(
+                            "https://randomuser.me/api/portraits/men/47.jpg"),
+                      ),
+                      Text(
+                        'Purushottam kumar',
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Text(
+                        'pks050505@gmail.com',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        '9123456789',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Package Type',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  'Purushottam kumar',
-                  style: Theme.of(context).textTheme.headline5,
-                )
+                Text('Design and color will deside later')
               ],
             )
             // DrawerHeader(

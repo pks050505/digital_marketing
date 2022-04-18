@@ -1,3 +1,4 @@
+import 'package:digital_marketing/dao/user.dart';
 import 'package:digital_marketing/widgets/cource_item.dart';
 import 'package:digital_marketing/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,9 @@ class CourcesPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Cources"),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+      bottomNavigationBar: const CustomNavBar(),
       body: Column(
         children: [
           JoinedCources(),
@@ -66,7 +68,7 @@ class JoinedCources extends StatelessWidget {
               style: Theme.of(context).textTheme.headline4,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           SizedBox(
             height: 100,
             child: ListView.builder(
@@ -74,7 +76,7 @@ class JoinedCources extends StatelessWidget {
               itemCount: 7,
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, i) {
-                return CourceItem();
+                return CourceItem(cource: Cource.cources[i]);
               },
             ),
           )
@@ -102,9 +104,11 @@ class AllCources extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              itemCount: 40,
+              itemCount: Cource.cources.length,
               itemBuilder: (_, i) {
-                return CourceItem();
+                return CourceItem(
+                  cource: Cource.cources[i],
+                );
               },
             ),
           ),

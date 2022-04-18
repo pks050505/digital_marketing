@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:digital_marketing/screen/cource_detail_page.dart';
+import 'package:digital_marketing/dao/user.dart';
+import 'package:digital_marketing/extra_screen/cource_detail_page.dart';
 import 'package:digital_marketing/widgets/cource_item.dart';
 import 'package:digital_marketing/widgets/custom_appbar.dart';
 import 'package:digital_marketing/widgets/custom_bottom_nav_bar.dart';
 import 'package:digital_marketing/widgets/custom_drawer.dart';
+import 'package:digital_marketing/widgets/instructor_item.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -20,34 +22,54 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(56),
-        child: CustomAppBar(),
-      ),
-      drawer: const CustomDrawer(),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            Container(
-              height: 150,
-              margin: const EdgeInsets.symmetric(vertical: 15),
-              child: FeatureText(),
+    Future<bool> _onWillPop() async {
+      return (await showDialog(
+            context: context,
+            builder: (context) => new AlertDialog(
+              title: new Text('Are you sure?'),
+              content: new Text('Do you want to exit an App'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: new Text('No'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: new Text('Yes'),
+                ),
+              ],
             ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, CourceDetailPage.routeName);
-                },
-                child: Text('Test')),
-            TrendingCourceWidget(),
-            SizedBox(height: 20),
-            CourcePackageType(),
-            InstructorCorouselSlider(),
-          ],
+          )) ??
+          false;
+    }
+
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(56),
+          child: CustomAppBar(),
         ),
+        drawer: const CustomDrawer(),
+        body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              Container(
+                height: 150,
+                margin: const EdgeInsets.symmetric(vertical: 15),
+                child: FeatureText(),
+              ),
+
+              TrendingCourceWidget(),
+              SizedBox(height: 20),
+              // CourcePackageType(),
+              InstructorCorouselSlider(),
+            ],
+          ),
+        ),
+        bottomNavigationBar: CustomNavBar(),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }
@@ -96,7 +118,7 @@ class TrendingCourceWidget extends StatelessWidget {
             shrinkWrap: true,
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            itemCount: 5,
+            itemCount: Cource.cources.length,
             itemBuilder: (_, i) {
               return InkWell(
                 onTap: () {
@@ -104,7 +126,7 @@ class TrendingCourceWidget extends StatelessWidget {
                     return CourceDetailPage();
                   }));
                 },
-                child: CourceItem(),
+                child: CourceItem(cource: Cource.cources[i]),
               );
             },
           ),
@@ -237,14 +259,9 @@ class InstructorCorouselSlider extends StatelessWidget {
         ),
         CarouselSlider(
           items: List.generate(
-              6,
-              (index) => Container(
-                    margin: const EdgeInsets.all(5),
-                    height: 130,
-                    width: 150,
-                    color: Colors.amber,
-                    child: Center(child: Text('item ${index + 1}')),
-                  )),
+            6,
+            (index) => const InstructorItem(),
+          ),
           options: CarouselOptions(
             height: 300,
             aspectRatio: 16 / 9,
