@@ -1,3 +1,4 @@
+import 'package:digital_marketing/dao/models.dart';
 import 'package:digital_marketing/widgets/video_item.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -7,14 +8,15 @@ String courceUrl =
 
 class CourceDetailPage extends StatefulWidget {
   static const routeName = 'cource_detail_page';
-  const CourceDetailPage({Key? key}) : super(key: key);
-  static MaterialPageRoute route() {
+  const CourceDetailPage({Key? key, required this.cource}) : super(key: key);
+  static MaterialPageRoute route({required CourceModel cource}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (_) => const CourceDetailPage(),
+      builder: (_) => CourceDetailPage(cource: cource),
     );
   }
 
+  final CourceModel cource;
   @override
   State<CourceDetailPage> createState() => _CourceDetailPageState();
 }
@@ -37,7 +39,7 @@ class _CourceDetailPageState extends State<CourceDetailPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: const Text('Cource Title'),
+        title: Text(widget.cource.courceName),
         centerTitle: true,
         actions: [
           IconButton(

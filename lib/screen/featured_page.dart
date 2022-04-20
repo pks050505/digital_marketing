@@ -34,7 +34,7 @@ class FeaturedPage extends StatelessWidget {
                 Container(
                   height: 170,
                 ),
-                Text('Comming soon...'),
+                const Text('Comming soon...'),
               ],
             )
             // DrawerHeader(

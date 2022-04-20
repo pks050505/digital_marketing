@@ -1,12 +1,13 @@
-import 'package:digital_marketing/dao/user.dart';
+import 'package:digital_marketing/dao/cource_model.dart';
 import 'package:flutter/material.dart';
 
 class CourceItem extends StatelessWidget {
-  final Cource cource;
+  final CourceModel cource;
   const CourceItem({Key? key, required this.cource}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    //Todo here inkwell will implement and pass cource object to cource Detail page with Navigator argument
     return Container(
       height: 300,
       width: 250,
@@ -16,7 +17,7 @@ class CourceItem extends StatelessWidget {
           Stack(
             children: [
               Container(
-                child: Image.network(cource.image!),
+                child: Image.network(cource.courceUrl),
               ),
               Container(
                 padding: const EdgeInsets.all(4),
@@ -24,14 +25,14 @@ class CourceItem extends StatelessWidget {
                   color: Colors.amber,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: Text(cource.cource_category!),
+                child: Text(cource.courceCategory),
               )
             ],
           ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              cource.title!,
+              cource.courceName,
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
@@ -42,23 +43,22 @@ class CourceItem extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "https://randomuser.me/api/portraits/men/47.jpg"),
+                    backgroundImage: NetworkImage(cource.instructorUrl),
                   ),
-                  SizedBox(width: 6),
+                  const SizedBox(width: 6),
                   Text(
-                    'Paras Goal',
+                    cource.instructorName,
                     style: Theme.of(context).textTheme.bodyText1,
                   )
                 ],
               ),
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.star,
                     color: Colors.orange,
                   ),
-                  Text('4.3')
+                  Text(cource.rating.toString())
                 ],
               )
             ],

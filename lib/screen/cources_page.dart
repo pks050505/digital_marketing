@@ -1,4 +1,5 @@
-import 'package:digital_marketing/dao/user.dart';
+import 'package:digital_marketing/dao/cource_model.dart';
+import 'package:digital_marketing/test_page.dart';
 import 'package:digital_marketing/widgets/cource_item.dart';
 import 'package:digital_marketing/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,10 @@ class CourcesPage extends StatelessWidget {
       bottomNavigationBar: const CustomNavBar(),
       body: Column(
         children: [
-          JoinedCources(),
-          AllCources(),
+          JoinedCources(
+            joinedCources: CourceModel.cources,
+          ),
+          AllCources(allCources: CourceModel.cources),
         ],
       ),
       // body: GridView.builder(
@@ -48,13 +51,15 @@ class CourcesPage extends StatelessWidget {
 }
 
 class JoinedCources extends StatelessWidget {
-  const JoinedCources({Key? key}) : super(key: key);
+  const JoinedCources({Key? key, required this.joinedCources})
+      : super(key: key);
+  final List<CourceModel> joinedCources;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
-      height: 200,
+      height: MediaQuery.of(context).size.height / 3,
       decoration: BoxDecoration(
         border: Border.all(),
         borderRadius: BorderRadius.circular(10),
@@ -70,13 +75,13 @@ class JoinedCources extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           SizedBox(
-            height: 100,
+            height: 165,
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: 7,
+              itemCount: joinedCources.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, i) {
-                return CourceItem(cource: Cource.cources[i]);
+                return CourceCardTest(cource: joinedCources[i]);
               },
             ),
           )
@@ -87,7 +92,8 @@ class JoinedCources extends StatelessWidget {
 }
 
 class AllCources extends StatelessWidget {
-  const AllCources({Key? key}) : super(key: key);
+  const AllCources({Key? key, required this.allCources}) : super(key: key);
+  final List<CourceModel> allCources;
 
   @override
   Widget build(BuildContext context) {
@@ -104,10 +110,10 @@ class AllCources extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              itemCount: Cource.cources.length,
+              itemCount: allCources.length,
               itemBuilder: (_, i) {
                 return CourceItem(
-                  cource: Cource.cources[i],
+                  cource: allCources[i],
                 );
               },
             ),

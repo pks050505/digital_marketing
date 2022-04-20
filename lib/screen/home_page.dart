@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:digital_marketing/dao/user.dart';
+import 'package:digital_marketing/dao/cource_model.dart';
+import 'package:digital_marketing/dao/models.dart';
+
 import 'package:digital_marketing/extra_screen/cource_detail_page.dart';
+import 'package:digital_marketing/test_page.dart';
 import 'package:digital_marketing/widgets/cource_item.dart';
 import 'package:digital_marketing/widgets/custom_appbar.dart';
 import 'package:digital_marketing/widgets/custom_bottom_nav_bar.dart';
@@ -22,6 +25,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var index = 0;
     Future<bool> _onWillPop() async {
       return (await showDialog(
             context: context,
@@ -55,16 +59,58 @@ class HomePage extends StatelessWidget {
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
-              Container(
-                height: 150,
-                margin: const EdgeInsets.symmetric(vertical: 15),
-                child: FeatureText(),
+              // Container(
+              //   height: 150,
+              //   margin: const EdgeInsets.symmetric(vertical: 15),
+              //   child: FeatureText(),
+              // ),
+              CarouselSlider(
+                items: List.generate(
+                  6,
+                  (index) => Stack(
+                    children: [
+                      Container(
+                        color: Colors.amber,
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          'featured Post',
+                          style:
+                              Theme.of(context).textTheme.headline4!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Text('index $index'),
+                      )
+                    ],
+                  ),
+                ),
+                options: CarouselOptions(
+                  height: 220,
+                  onPageChanged: (i, reson) {
+                    print('index $i');
+                    index = i;
+                  },
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 0.9,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  scrollDirection: Axis.horizontal,
+                ),
               ),
-
               TrendingCourceWidget(),
               SizedBox(height: 20),
               // CourcePackageType(),
-              InstructorCorouselSlider(),
+              InstructorCorouselSlider(
+                instructors: InstructorModel.instructors,
+              ),
             ],
           ),
         ),
@@ -84,50 +130,27 @@ class TrendingCourceWidget extends StatelessWidget {
     return Container(
       color: Theme.of(context).primaryColor.withOpacity(0.1),
       child: Column(children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Most Trending Courses ',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.left,
-                ),
-              ),
+        Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Most Trending Courses ',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.left,
             ),
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.arrow_left_sharp),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.arrow_right_sharp),
-                )
-              ],
-            )
-          ],
+          ),
         ),
         Container(
           height: 340,
           child: ListView.builder(
             shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            itemCount: Cource.cources.length,
+            itemCount: CourceModel.cources.length,
             itemBuilder: (_, i) {
-              return InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return CourceDetailPage();
-                  }));
-                },
-                child: CourceItem(cource: Cource.cources[i]),
-              );
+              return CourceCardTest(cource: CourceModel.cources[i]);
             },
           ),
         )
@@ -228,8 +251,9 @@ class CourcePackageType extends StatelessWidget {
 }
 
 class InstructorCorouselSlider extends StatelessWidget {
-  const InstructorCorouselSlider({Key? key}) : super(key: key);
-
+  const InstructorCorouselSlider({Key? key, required this.instructors})
+      : super(key: key);
+  final List<InstructorModel> instructors;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -259,8 +283,8 @@ class InstructorCorouselSlider extends StatelessWidget {
         ),
         CarouselSlider(
           items: List.generate(
-            6,
-            (index) => const InstructorItem(),
+            instructors.length,
+            (index) => InstructorItem(instructor: instructors[index]),
           ),
           options: CarouselOptions(
             height: 300,

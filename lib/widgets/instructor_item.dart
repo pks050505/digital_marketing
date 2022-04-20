@@ -1,9 +1,10 @@
+import 'package:digital_marketing/dao/models.dart';
 import 'package:digital_marketing/extra_screen/cource_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class InstructorItem extends StatelessWidget {
-  const InstructorItem({Key? key}) : super(key: key);
-
+  const InstructorItem({Key? key, required this.instructor}) : super(key: key);
+  final InstructorModel instructor;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,13 +22,13 @@ class InstructorItem extends StatelessWidget {
           // const SizedBox(height: 10),
           ListTile(
             title: Text(
-              'Instructor name',
+              instructor.name,
               style: Theme.of(context)
                   .textTheme
                   .headline5!
                   .copyWith(fontWeight: FontWeight.bold),
             ),
-            subtitle: const Text('Instructor name'),
+            subtitle: Text(instructor.name),
           )
         ],
       ),
