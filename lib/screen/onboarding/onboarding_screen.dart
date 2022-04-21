@@ -1,4 +1,5 @@
 import 'package:digital_marketing/screen/home_page.dart';
+import 'package:digital_marketing/screen/welcomePage/welcome_page_for_login_and_home.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
@@ -25,11 +26,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   var size;
   var listPagesViewModel = [
     PageViewModel(
-        bodyWidget: Container(
-          color: Colors.amber,
-          child: Text('data'),
-        ),
-        titleWidget: Text('Title')),
+      bodyWidget: Container(
+        color: Colors.amber,
+        child: const Text('data'),
+      ),
+      titleWidget: const Text('Title'),
+    ),
     PageViewModel(
       title: "Title of second page",
       body:
@@ -66,7 +68,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return IntroductionScreen(
       pages: listPagesViewModel,
       onDone: () {
-        Navigator.pushReplacementNamed(context, HomePage.routeName);
+        Navigator.pushReplacementNamed(
+            context, WelcomePageForLoginAndHome.routeName);
       },
       // onSkip: () {
       //   Navigator.pushReplacementNamed(context, HomePage.routeName);

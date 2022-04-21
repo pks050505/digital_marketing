@@ -3,6 +3,8 @@ import 'package:digital_marketing/dao/cource_model.dart';
 import 'package:digital_marketing/dao/models.dart';
 
 import 'package:digital_marketing/extra_screen/cource_detail_page.dart';
+import 'package:digital_marketing/screen/onboarding/onboarding_screen.dart';
+import 'package:digital_marketing/service/cource_service.dart';
 import 'package:digital_marketing/test_page.dart';
 import 'package:digital_marketing/widgets/cource_item.dart';
 import 'package:digital_marketing/widgets/custom_appbar.dart';
@@ -25,6 +27,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CourceService courceService = CourceServiceImpl();
+
     var index = 0;
     Future<bool> _onWillPop() async {
       return (await showDialog(
@@ -64,6 +68,7 @@ class HomePage extends StatelessWidget {
               //   margin: const EdgeInsets.symmetric(vertical: 15),
               //   child: FeatureText(),
               // ),
+              // FeaturedCorouselSlider(instructors: instructors),
               CarouselSlider(
                 items: List.generate(
                   6,
@@ -90,7 +95,6 @@ class HomePage extends StatelessWidget {
                 options: CarouselOptions(
                   height: 220,
                   onPageChanged: (i, reson) {
-                    print('index $i');
                     index = i;
                   },
                   aspectRatio: 16 / 9,
@@ -285,6 +289,38 @@ class InstructorCorouselSlider extends StatelessWidget {
           items: List.generate(
             instructors.length,
             (index) => InstructorItem(instructor: instructors[index]),
+          ),
+          options: CarouselOptions(
+            height: 300,
+            aspectRatio: 16 / 9,
+            viewportFraction: 0.8,
+            initialPage: 0,
+            enableInfiniteScroll: true,
+            reverse: false,
+            autoPlay: true,
+            autoPlayInterval: Duration(seconds: 3),
+            autoPlayAnimationDuration: Duration(milliseconds: 800),
+            autoPlayCurve: Curves.fastOutSlowIn,
+            scrollDirection: Axis.horizontal,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class FeaturedCorouselSlider extends StatelessWidget {
+  const FeaturedCorouselSlider({Key? key, required this.instructors})
+      : super(key: key);
+  final List<InstructorModel> instructors;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CarouselSlider(
+          items: List.generate(
+            instructors.length,
+            (index) => Image.network(imageUrll),
           ),
           options: CarouselOptions(
             height: 300,

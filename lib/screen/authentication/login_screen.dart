@@ -1,4 +1,6 @@
+import 'package:digital_marketing/screen/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = '/login';
@@ -17,39 +19,51 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
-            const FlutterLogo(
-              size: 100,
+            Text(
+              'Login',
+              style: Theme.of(context).textTheme.headline2,
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 100),
             TextFormField(
               decoration: const InputDecoration(
                 hintText: 'abc@gmail.com',
-                label: Text('Email'),
+                label: Text(
+                  'email',
+                ),
+                border: OutlineInputBorder(),
               ),
               keyboardType: TextInputType.emailAddress,
             ),
+            const SizedBox(height: 10),
             TextFormField(
               decoration: const InputDecoration(
                 hintText: 'Enter Your Password',
                 label: Text('Password'),
+                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                //Todo: Api call for authentication
+                Navigator.pushNamed(context, HomePage.routeName);
               },
               child: const Text('Login'),
             ),
             ElevatedButton(
-              onPressed: () {
-                // Todo : Navigate to Website SignUp Page
+              onPressed: () async {
+                const url = "https://www.idigitalpreneur.com/login";
+
+                if (await canLaunch(url)) {
+                  launch(url);
+                }
               },
-              child: const Text('SignUp'),
+              child: const Text('Create account'),
             )
           ],
         ),

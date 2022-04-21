@@ -1,5 +1,5 @@
 import 'package:digital_marketing/core/app_router.dart';
-import 'package:digital_marketing/screen/onboarding/onboarding_screen.dart';
+import 'package:digital_marketing/screen/profile_page.dart';
 
 import 'package:flutter/material.dart';
 
@@ -16,9 +16,11 @@ class MyApp extends StatelessWidget {
       title: 'Digital Marketing',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
       ),
-      initialRoute: OnBoardingScreen.routeName,
+      initialRoute: ProfilePage.routeName,
+      // initialRoute: LoginScreen.routeName,
+      // initialRoute: WelcomePageForLoginAndHome.routeName,
       onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }

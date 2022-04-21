@@ -1,3 +1,4 @@
+import 'package:digital_marketing/screen/welcomePage/welcome_page_for_login_and_home.dart';
 import 'package:digital_marketing/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -16,80 +17,243 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
       bottomNavigationBar: const CustomNavBar(),
-      body: Align(
-        alignment: Alignment.center,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+      body: SafeArea(
+        child: ListView(
+          shrinkWrap: true,
           children: [
-            Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  decoration: BoxDecoration(
-                    border: Border.all(),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.deepOrange, Colors.pinkAccent],
+                ),
+              ),
+              child: Container(
+                width: double.infinity,
+                height: 350.0,
+                child: Center(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CircleAvatar(
-                        minRadius: 40,
-                        maxRadius: 60,
                         backgroundImage: NetworkImage(
-                            "https://randomuser.me/api/portraits/men/47.jpg"),
-                      ),
-                      Text(
-                        'Purushottam kumar',
-                        style: Theme.of(context).textTheme.headline4,
+                          "https://randomuser.me/api/portraits/men/47.jpg",
+                        ),
+                        radius: 50.0,
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 10.0,
                       ),
                       Text(
-                        'pks050505@gmail.com',
-                        style: Theme.of(context).textTheme.bodyText1,
+                        "Purushottam Kumar singh",
+                        style: TextStyle(
+                          fontSize: 22.0,
+                          color: Colors.white,
+                        ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 10.0,
                       ),
-                      Text(
-                        '9123456789',
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Package Type',
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
+                      Card(
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 5.0),
+                        clipBehavior: Clip.antiAlias,
+                        color: Colors.white,
+                        elevation: 5.0,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 22.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Posts",
+                                      style: TextStyle(
+                                        color: Colors.redAccent,
+                                        fontSize: 22.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "1200",
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: Colors.pinkAccent,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Followers",
+                                      style: TextStyle(
+                                        color: Colors.redAccent,
+                                        fontSize: 22.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "21.2K",
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: Colors.pinkAccent,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Follow",
+                                      style: TextStyle(
+                                        color: Colors.redAccent,
+                                        fontSize: 22.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "1200",
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: Colors.pinkAccent,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
-                Text('Design and color will deside later')
-              ],
-            )
-            // DrawerHeader(
-            //   child: Center(
-            //     child: Column(
-            //       children: [
-            //         CircleAvatar(
-            //           minRadius: 40,
-            //           maxRadius: 60,
-            //         ),
-            //         Text(
-            //           'Purushottam kumar',
-            //           style: Theme.of(context).textTheme.headline5,
-            //         )
-            //       ],
-            //     ),
-            //   ),
-            // )
+              ),
+            ),
+            Card(
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+              clipBehavior: Clip.antiAlias,
+              color: Colors.white,
+              elevation: 5.0,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 22.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            'email  ',
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          flex: 1,
+                        ),
+                        Flexible(
+                          child: Text(
+                            'pks050505@gmail.com',
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          flex: 3,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 30.0, horizontal: 16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Info:",
+                      style: TextStyle(
+                          color: Colors.redAccent,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 28.0),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Text(
+                      'My name is Purushottam and I am  a freelance mobile app developper.\n'
+                      'Having Experiece in Flutter and Android & DevOps',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w300,
+                        color: Colors.black,
+                        letterSpacing: 2.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // SizedBox(
+            //   height: 20.0,
+            // ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                      context, WelcomePageForLoginAndHome.routeName);
+                },
+                // shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(80.0)),
+                // elevation: 0.0,
+                // padding: EdgeInsets.all(0.0),
+                child: Ink(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.centerRight,
+                      end: Alignment.centerLeft,
+                      colors: [Colors.pink, Colors.pinkAccent],
+                    ),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: Text(
+                    "LogOut",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 26.0,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                )),
           ],
         ),
       ),

@@ -112,7 +112,7 @@ class AllCources extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               itemCount: allCources.length,
               itemBuilder: (_, i) {
-                return CourceItem(
+                return CourceCardTest(
                   cource: allCources[i],
                 );
               },

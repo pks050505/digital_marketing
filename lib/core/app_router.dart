@@ -6,10 +6,12 @@ import 'package:digital_marketing/screen/explore_search.dart';
 import 'package:digital_marketing/screen/featured_page.dart';
 import 'package:digital_marketing/screen/home_page.dart';
 import 'package:digital_marketing/screen/onboarding/onboarding_screen.dart';
+import 'package:digital_marketing/screen/welcomePage/welcome_page_for_login_and_home.dart';
 import 'package:digital_marketing/test_page.dart';
 
 import 'package:flutter/material.dart';
 import '../screen/profile_page.dart';
+import '../screen/welcomePage/welcome_page_for_login_and_home.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
@@ -31,6 +33,8 @@ class AppRouter {
         return LoginScreen.route();
       case OnBoardingScreen.routeName:
         return OnBoardingScreen.route();
+      case WelcomePageForLoginAndHome.routeName:
+        return WelcomePageForLoginAndHome.route();
       case TestPage.routeName:
         return TestPage.route();
       default:

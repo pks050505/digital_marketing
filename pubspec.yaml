@@ -15,11 +15,13 @@ dependencies:
 
   
   cupertino_icons: ^1.0.2
-  carousel_slider: ^4.0.0
+  carousel_slider: ^4.0.0 
   video_player: ^2.3.0
   introduction_screen: ^3.0.2
   equatable: ^2.0.3
   flutter_bloc: ^8.0.1
+  url_launcher: ^6.0.20
+  flutter_windowmanager: ^0.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,6 +1,7 @@
 import 'package:digital_marketing/dao/models.dart';
 import 'package:digital_marketing/widgets/video_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:video_player/video_player.dart';
 
 String courceUrl =
@@ -32,6 +33,13 @@ class _CourceDetailPageState extends State<CourceDetailPage> {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
       });
+  }
+
+  @override
+  void didChangeDependencies() async {
+    // app does not allow to take screen shot
+    await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+    super.didChangeDependencies();
   }
 
   @override
