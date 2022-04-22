@@ -1,4 +1,4 @@
-import 'package:digital_marketing/screen/home_page.dart';
+import 'package:digital_marketing/screen/root_page/root_page.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -7,9 +7,7 @@ class LoginScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (_) {
-        return const LoginScreen();
-      },
+      builder: (_) => const LoginScreen(),
     );
   }
 
@@ -51,7 +49,8 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, HomePage.routeName);
+                Navigator.pushNamed(context, RootPage.routeName);
+                // Navigator.pushReplacementNamed(context, RootPage.routeName);
               },
               child: const Text('Login'),
             ),

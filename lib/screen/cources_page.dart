@@ -1,7 +1,7 @@
 import 'package:digital_marketing/dao/cource_model.dart';
 import 'package:digital_marketing/test_page.dart';
 import 'package:digital_marketing/widgets/cource_item.dart';
-import 'package:digital_marketing/widgets/custom_bottom_nav_bar.dart';
+import 'package:digital_marketing/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
 class CourcesPage extends StatelessWidget {
@@ -20,16 +20,23 @@ class CourcesPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Cources"),
         centerTitle: true,
+        //some error found neet to fix
         automaticallyImplyLeading: false,
       ),
-      bottomNavigationBar: const CustomNavBar(),
-      body: Column(
-        children: [
-          JoinedCources(
-            joinedCources: CourceModel.cources,
-          ),
-          AllCources(allCources: CourceModel.cources),
-        ],
+
+      body: Container(
+        margin: const EdgeInsets.only(left: 8),
+        child: Column(
+          children: [
+            JoinedCources(
+              joinedCources: CourceModel.cources,
+            ),
+            Divider(),
+            AllCources(
+              allCources: CourceModel.cources,
+            ),
+          ],
+        ),
       ),
       // body: GridView.builder(
       //   physics: BouncingScrollPhysics(),
@@ -57,36 +64,25 @@ class JoinedCources extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      height: MediaQuery.of(context).size.height / 3,
-      decoration: BoxDecoration(
-        border: Border.all(),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              'My Cource',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+    return Column(
+      children: [
+        const SectionTitle(title: 'My Cource'),
+        const SizedBox(height: 10),
+        SizedBox(
+          height: 230,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: joinedCources.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (_, i) {
+              return CourceItem(
+                cource: joinedCources[i],
+                widthFactor: 2,
+              );
+            },
           ),
-          const SizedBox(height: 10),
-          SizedBox(
-            height: 165,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: joinedCources.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (_, i) {
-                return CourceCardTest(cource: joinedCources[i]);
-              },
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }
@@ -100,20 +96,16 @@ class AllCources extends StatelessWidget {
     return Flexible(
       child: Column(
         children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              'All Cources',
-              style: Theme.of(context).textTheme.headline5,
-            ),
-          ),
+          SectionTitle(title: 'All Cources'),
+          SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               itemCount: allCources.length,
               itemBuilder: (_, i) {
-                return CourceCardTest(
+                return CourceItem(
                   cource: allCources[i],
+                  widthFactor: 1,
                 );
               },
             ),

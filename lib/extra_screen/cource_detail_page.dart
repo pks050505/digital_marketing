@@ -46,12 +46,19 @@ class _CourceDetailPageState extends State<CourceDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         title: Text(widget.cource.courceName),
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (_) {
+                    return Center(
+                      child: Text('Instructor Details'),
+                    );
+                  });
+            },
             icon: const Icon(Icons.info),
             tooltip: 'Cource Info',
           )

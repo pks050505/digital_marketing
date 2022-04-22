@@ -21,7 +21,7 @@ class ExploreSearchPage extends StatelessWidget {
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      bottomNavigationBar: const CustomNavBar(),
+      // bottomNavigationBar: const CustomNavBar(),
       body: Align(
         alignment: Alignment.center,
         child: Column(

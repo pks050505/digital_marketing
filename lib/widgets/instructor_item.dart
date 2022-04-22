@@ -11,13 +11,21 @@ class InstructorItem extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       child: Column(
         children: [
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-              border: Border.all(),
-              borderRadius: BorderRadius.circular(15),
+          // Container(
+          //   height: 200,
+          //   decoration: BoxDecoration(
+          //     border: Border.all(),
+          //     borderRadius: BorderRadius.circular(15),
+          //   ),
+          //   child: Image.network(courceUrl),
+          // ),
+          SizedBox(
+            height: 160,
+            child: FadeInImage.assetNetwork(
+              image: instructor.instructorPic,
+              placeholder: 'assert/loading.gif',
+              fit: BoxFit.cover,
             ),
-            child: Image.network(courceUrl),
           ),
           // const SizedBox(height: 10),
           ListTile(

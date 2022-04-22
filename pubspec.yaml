@@ -20,8 +20,11 @@ dependencies:
   introduction_screen: ^3.0.2
   equatable: ^2.0.3
   flutter_bloc: ^8.0.1
+  shared_preferences: ^2.0.13
   url_launcher: ^6.0.20
-  flutter_windowmanager: ^0.2.0
+  get_it: ^7.2.0  # for dependency Injection and Service Locator
+
+  flutter_windowmanager: ^0.2.0 #screen shot
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -38,8 +41,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assert/loading.gif
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

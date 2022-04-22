@@ -17,7 +17,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const CustomNavBar(),
+      // bottomNavigationBar: const CustomNavBar(),
       body: SafeArea(
         child: ListView(
           shrinkWrap: true,
@@ -27,7 +27,10 @@ class ProfilePage extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.deepOrange, Colors.pinkAccent],
+                  colors: [
+                    Colors.deepOrange,
+                    Colors.pinkAccent,
+                  ],
                 ),
               ),
               child: Container(
@@ -57,93 +60,93 @@ class ProfilePage extends StatelessWidget {
                       SizedBox(
                         height: 10.0,
                       ),
-                      Card(
-                        margin: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 5.0),
-                        clipBehavior: Clip.antiAlias,
-                        color: Colors.white,
-                        elevation: 5.0,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 22.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Posts",
-                                      style: TextStyle(
-                                        color: Colors.redAccent,
-                                        fontSize: 22.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      "1200",
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.pinkAccent,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Followers",
-                                      style: TextStyle(
-                                        color: Colors.redAccent,
-                                        fontSize: 22.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      "21.2K",
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.pinkAccent,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Follow",
-                                      style: TextStyle(
-                                        color: Colors.redAccent,
-                                        fontSize: 22.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      "1200",
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.pinkAccent,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
+                      // Card(
+                      //   margin: EdgeInsets.symmetric(
+                      //       horizontal: 20.0, vertical: 5.0),
+                      //   clipBehavior: Clip.antiAlias,
+                      //   color: Colors.white,
+                      //   elevation: 5.0,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.symmetric(
+                      //         horizontal: 8.0, vertical: 22.0),
+                      //     child: Row(
+                      //       children: [
+                      //         Expanded(
+                      //           child: Column(
+                      //             children: [
+                      //               Text(
+                      //                 "Posts",
+                      //                 style: TextStyle(
+                      //                   color: Colors.redAccent,
+                      //                   fontSize: 22.0,
+                      //                   fontWeight: FontWeight.bold,
+                      //                 ),
+                      //               ),
+                      //               SizedBox(
+                      //                 height: 5.0,
+                      //               ),
+                      //               Text(
+                      //                 "1200",
+                      //                 style: TextStyle(
+                      //                   fontSize: 20.0,
+                      //                   color: Colors.pinkAccent,
+                      //                 ),
+                      //               )
+                      //             ],
+                      //           ),
+                      //         ),
+                      //         Expanded(
+                      //           child: Column(
+                      //             children: [
+                      //               Text(
+                      //                 "Followers",
+                      //                 style: TextStyle(
+                      //                   color: Colors.redAccent,
+                      //                   fontSize: 22.0,
+                      //                   fontWeight: FontWeight.bold,
+                      //                 ),
+                      //               ),
+                      //               SizedBox(
+                      //                 height: 5.0,
+                      //               ),
+                      //               Text(
+                      //                 "21.2K",
+                      //                 style: TextStyle(
+                      //                   fontSize: 20.0,
+                      //                   color: Colors.pinkAccent,
+                      //                 ),
+                      //               )
+                      //             ],
+                      //           ),
+                      //         ),
+                      //         Expanded(
+                      //           child: Column(
+                      //             children: [
+                      //               Text(
+                      //                 "Follow",
+                      //                 style: TextStyle(
+                      //                   color: Colors.redAccent,
+                      //                   fontSize: 22.0,
+                      //                   fontWeight: FontWeight.bold,
+                      //                 ),
+                      //               ),
+                      //               SizedBox(
+                      //                 height: 5.0,
+                      //               ),
+                      //               Text(
+                      //                 "1200",
+                      //                 style: TextStyle(
+                      //                   fontSize: 20.0,
+                      //                   color: Colors.pinkAccent,
+                      //                 ),
+                      //               )
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
@@ -160,70 +163,48 @@ class ProfilePage extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 22.0),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            'email  ',
-                            style: TextStyle(
-                              color: Colors.redAccent,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          flex: 1,
-                        ),
-                        Flexible(
-                          child: Text(
-                            'pks050505@gmail.com',
-                            style: TextStyle(
-                              color: Colors.redAccent,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          flex: 3,
-                        ),
-                      ],
-                    ),
+                    ProfileTile(title: 'email', value: 'pks050505@gmail.com'),
+                    SizedBox(height: 10),
+                    ProfileTile(title: 'phone', value: '9123456789'),
+                    SizedBox(height: 10),
+                    ProfileTile(title: 'package', value: 'Elite'),
                   ],
                 ),
               ),
             ),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 30.0, horizontal: 16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Info:",
-                      style: TextStyle(
-                          color: Colors.redAccent,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 28.0),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Text(
-                      'My name is Purushottam and I am  a freelance mobile app developper.\n'
-                      'Having Experiece in Flutter and Android & DevOps',
-                      style: TextStyle(
-                        fontSize: 22.0,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.black,
-                        letterSpacing: 2.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            // Container(
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(
+            //         vertical: 30.0, horizontal: 16.0),
+            //     child: Column(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         Text(
+            //           "Info:",
+            //           style: TextStyle(
+            //               color: Colors.redAccent,
+            //               fontStyle: FontStyle.normal,
+            //               fontSize: 28.0),
+            //         ),
+            //         SizedBox(
+            //           height: 10.0,
+            //         ),
+            //         Text(
+            //           'My name is Purushottam and I am  a freelance mobile app developper.\n'
+            //           'Having Experiece in Flutter and Android & DevOps',
+            //           style: TextStyle(
+            //             fontSize: 22.0,
+            //             fontStyle: FontStyle.italic,
+            //             fontWeight: FontWeight.w300,
+            //             color: Colors.black,
+            //             letterSpacing: 2.0,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             // SizedBox(
             //   height: 20.0,
             // ),
@@ -257,6 +238,47 @@ class ProfilePage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class ProfileTile extends StatelessWidget {
+  final String title;
+  final String value;
+  const ProfileTile({
+    Key? key,
+    required this.title,
+    required this.value,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: Text(
+            title,
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          flex: 1,
+        ),
+        Flexible(
+          child: Text(
+            value,
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          flex: 3,
+        ),
+      ],
     );
   }
 }
