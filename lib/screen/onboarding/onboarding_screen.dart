@@ -1,6 +1,7 @@
+import 'package:digital_marketing/bloc/cubit/onboard_cubit.dart';
 import 'package:digital_marketing/screen/home_page.dart';
-import 'package:digital_marketing/screen/welcomePage/welcome_page_for_login_and_home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 var imageUrll =
@@ -23,7 +24,6 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  var size;
   var listPagesViewModel = [
     PageViewModel(
       bodyWidget: Container(
@@ -68,15 +68,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return IntroductionScreen(
       pages: listPagesViewModel,
       onDone: () {
-        Navigator.pushReplacementNamed(
-            context, WelcomePageForLoginAndHome.routeName);
+        BlocProvider.of<OnboardCubit>(context).changeOnboardState();
       },
-      // onSkip: () {
-      //   Navigator.pushReplacementNamed(context, HomePage.routeName);
-      // },
+      onSkip: () {
+        BlocProvider.of<OnboardCubit>(context).changeOnboardState();
+        Navigator.pushReplacementNamed(context, HomePage.routeName);
+      },
       showBackButton: false,
       showSkipButton: true,
-      skip: Text('Skip'),
+      skip: const Text('Skip'),
       next: const Text('Next'),
       done: const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
       dotsDecorator: DotsDecorator(

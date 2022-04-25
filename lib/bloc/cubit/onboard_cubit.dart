@@ -1,19 +1,21 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-part 'onboard_state.dart';
+// if state is false=> then Onboard screen will not show
+//if state is true => then onBoardScreen will show
+class OnboardCubit extends HydratedCubit<bool> {
+  OnboardCubit() : super(true);
+  void changeOnboardState() => emit(false);
 
-class OnboardCubit extends Cubit<OnboardState> {
-  final SharedPreferences preferences;
+  @override
+  bool? fromJson(Map<String, dynamic> json) => json['onboard'] as bool;
 
-  OnboardCubit({required this.preferences}) : super(OnboardInitial());
-  void firstTimeUser() {
-    bool? isFirstTime = preferences.getBool('onBoardScreen');
-    if (isFirstTime == true || isFirstTime == null) {
-      emit(ShowOnBoardState());
-    } else {
-      emit(NotShowOnBoardState());
-    }
-  }
+  @override
+  Map<String, dynamic>? toJson(bool state) => {'onboard': state};
+
+  // @override
+  // int fromJson(Map<String, dynamic> json) => json['value'] as int;
+
+  // @override
+  // Map<String, int> toJson(int state) => { 'value': state };
+
 }

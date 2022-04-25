@@ -1,5 +1,3 @@
-import 'package:digital_marketing/screen/welcomePage/welcome_page_for_login_and_home.dart';
-import 'package:digital_marketing/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -209,10 +207,7 @@ class ProfilePage extends StatelessWidget {
             //   height: 20.0,
             // ),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(
-                      context, WelcomePageForLoginAndHome.routeName);
-                },
+                onPressed: () {},
                 // shape: RoundedRectangleBorder(
                 //     borderRadius: BorderRadius.circular(80.0)),
                 // elevation: 0.0,

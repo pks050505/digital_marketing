@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
   static const routeName = '/root_page';
-
   static MaterialPageRoute route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
@@ -23,17 +22,17 @@ class _RootPageState extends State<RootPage> {
   Future<bool> _onWillPop() async {
     return (await showDialog(
           context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text('Are you sure?'),
-            content: new Text('Do you want to exit an App'),
+          builder: (context) => AlertDialog(
+            title: const Text('Are you sure?'),
+            content: const Text('Do you want to exit an App'),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
-                child: new Text('No'),
+                child: const Text('No'),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(true),
-                child: new Text('Yes'),
+                child: const Text('Yes'),
               ),
             ],
           ),

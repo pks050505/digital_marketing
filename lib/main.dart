@@ -1,19 +1,29 @@
+import 'package:digital_marketing/bloc/authentication/authentication_bloc.dart';
 import 'package:digital_marketing/bloc/cubit/onboard_cubit.dart';
+import 'package:digital_marketing/bloc/login/login_bloc.dart';
 import 'package:digital_marketing/bloc_observer.dart';
 import 'package:digital_marketing/core/app_router.dart';
 import 'package:digital_marketing/injection_container.dart';
-
+import 'package:digital_marketing/repository/auth_repository.dart';
+import 'package:digital_marketing/screen/authentication/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'injection_container.dart' as di;
-import 'screen/authentication/login_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await di.init();
-  BlocOverrides.runZoned(
-    () => runApp(const MyApp()),
+  final storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
+  HydratedBlocOverrides.runZoned(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await di.init();
+      runApp(const MyApp());
+    },
     blocObserver: AppBlocObserver(),
+    storage: storage,
   );
 }
 
@@ -22,23 +32,36 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiRepositoryProvider(
       providers: [
-        // BlocProvider<OnboardCubit>(create: ((context) {
-        //   return OnboardCubit(preferences: sl())..firstTimeUser();
-        // })),
-        BlocProvider<OnboardCubit>(create: (_) => sl())
+        RepositoryProvider<AuthRepository>(create: (_) => sl()),
       ],
-      child: MaterialApp(
-        title: 'Digital Marketing',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(primarySwatch: Colors.pink),
+      child: MultiBlocProvider(
+        providers: [
+          // BlocProvider<OnboardCubit>(create: ((context) {
+          //   return OnboardCubit(preferences: sl())..firstTimeUser();
+          // })),
+          // need to implement
+          // BlocProvider<AuthenticationBloc>(create: (_) => sl()),
+          BlocProvider<AuthenticationBloc>(create: (_) => sl()),
+          BlocProvider<LoginBloc>(create: (_) => sl()),
+          BlocProvider<OnboardCubit>(create: (_) => sl())
+        ],
+        child: BlocBuilder<OnboardCubit, bool>(
+          //need to implement Authentication Bloc in Welcome Screen
+          builder: (context, onboard) {
+            return MaterialApp(
+              title: 'Digital Marketing App',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(primarySwatch: Colors.pink),
 
-        // initialRoute: ProfilePage.routeName,
-        initialRoute: LoginScreen.routeName,
-        // // initialRoute: WelcomePageForLoginAndHome.routeName,
-        // onGenerateRoute: AppRouter.onGenerateRoute,
-        onGenerateRoute: AppRouter.onGenerateRoute,
+              // initialRoute:
+              //     onboard ? OnBoardingScreen.routeName : WelcomeScreen.routeName,
+              initialRoute: LoginScreen.routeName,
+              onGenerateRoute: AppRouter.onGenerateRoute,
+            );
+          },
+        ),
       ),
     );
   }

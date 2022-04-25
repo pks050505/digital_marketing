@@ -4,11 +4,8 @@ import 'package:digital_marketing/screen/authentication/login_screen.dart';
 
 import 'package:digital_marketing/screen/onboarding/onboarding_screen.dart';
 import 'package:digital_marketing/screen/root_page/root_page.dart';
-import 'package:digital_marketing/screen/welcomePage/welcome_page_for_login_and_home.dart';
 
 import 'package:flutter/material.dart';
-
-import '../screen/welcomePage/welcome_page_for_login_and_home.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
@@ -33,9 +30,6 @@ class AppRouter {
       //   return ExploreSearchPage.route();
       // case FeaturedPage.routeName:
       //   return FeaturedPage.route();
-
-      case WelcomePageForLoginAndHome.routeName:
-        return WelcomePageForLoginAndHome.route();
 
       default:
         return _errorPage();

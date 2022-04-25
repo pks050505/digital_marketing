@@ -1,5 +1,5 @@
 import 'package:digital_marketing/dao/cource_model.dart';
-import 'package:digital_marketing/test_page.dart';
+
 import 'package:digital_marketing/widgets/cource_item.dart';
 import 'package:digital_marketing/widgets/section_title.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class CourcesPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Cources"),
         centerTitle: true,
-        //some error found neet to fix
+        //some error found need to fix
         automaticallyImplyLeading: false,
       ),
 
@@ -31,7 +31,7 @@ class CourcesPage extends StatelessWidget {
             JoinedCources(
               joinedCources: CourceModel.cources,
             ),
-            Divider(),
+            const Divider(),
             AllCources(
               allCources: CourceModel.cources,
             ),
