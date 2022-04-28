@@ -1,35 +1,64 @@
 import 'package:bloc/bloc.dart';
-import 'package:digital_marketing/repository/auth_repository.dart';
-
 import 'package:equatable/equatable.dart';
+
+import 'package:formz/formz.dart';
+
+import '../../models/password.dart';
+import '../../models/username.dart';
+import '../../repository/authentication_repository.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final AuthRepository authRepo;
+  LoginBloc({
+    required AuthenticationRepository authenticationRepository,
+  })  : _authenticationRepository = authenticationRepository,
+        super(const LoginState()) {
+    on<LoginUsernameChanged>(_onUsernameChanged);
+    on<LoginPasswordChanged>(_onPasswordChanged);
+    on<LoginSubmitted>(_onSubmitted);
+  }
 
-  LoginBloc({required this.authRepo}) : super(LoginState()) {
-    //email change
-    on<LoginEmailChanged>((event, emit) {
-      emit(state.copywith(email: event.email));
-    });
-    //password change
-    on<LoginPasswordChanged>((event, emit) {
-      emit(state.copywith(password: event.password));
-    });
-    //form submitted
-    on<LoginFormSubmittedEvent>((event, emit) async {
-      emit(state.copywith(status: FormSubmitting()));
+  final AuthenticationRepository _authenticationRepository;
+
+  void _onUsernameChanged(
+    LoginUsernameChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    final username = Username.dirty(event.username);
+    emit(state.copyWith(
+      username: username,
+      status: Formz.validate([state.password, username]),
+    ));
+  }
+
+  void _onPasswordChanged(
+    LoginPasswordChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    final password = Password.dirty(event.password);
+    emit(state.copyWith(
+      password: password,
+      status: Formz.validate([password, state.username]),
+    ));
+  }
+
+  void _onSubmitted(
+    LoginSubmitted event,
+    Emitter<LoginState> emit,
+  ) async {
+    if (state.status.isValidated) {
+      emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
-        await authRepo.login(state.email, state.password);
-        emit(state.copywith(status: FormSubmissionSuccess()));
-      } catch (e) {
-        //need to pass failure message
-        emit(
-          state.copywith(status: FormSubmissionFailed(Exception(e.toString()))),
+        await _authenticationRepository.logIn(
+          username: state.username.value,
+          password: state.password.value,
         );
+        emit(state.copyWith(status: FormzStatus.submissionSuccess));
+      } catch (_) {
+        emit(state.copyWith(status: FormzStatus.submissionFailure));
       }
-    });
+    }
   }
 }

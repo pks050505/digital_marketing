@@ -1,4 +1,4 @@
-import 'package:digital_marketing/screen/onboarding/onboarding_screen.dart';
+import 'package:digital_marketing/screen/home_page.dart';
 
 class CourceModel {
   final String courceId;

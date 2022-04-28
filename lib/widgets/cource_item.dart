@@ -29,13 +29,17 @@ class CourceItem extends StatelessWidget {
             Stack(
               children: [
                 SizedBox(
-                  height: 140,
+                  height: 100,
                   width: width,
-                  child: FadeInImage.assetNetwork(
-                    image: cource.courceUrl,
-                    placeholder: 'assert/loading.gif',
+                  child: Image.network(
+                    cource.courceUrl,
                     fit: BoxFit.cover,
                   ),
+                  // child: FadeInImage.assetNetwork(
+                  //   image: cource.courceUrl,
+                  //   placeholder: 'asserts/images/loading.gif',
+                  //   fit: BoxFit.cover,
+                  // ),
                 ),
                 Positioned(
                   top: 5,
@@ -47,11 +51,13 @@ class CourceItem extends StatelessWidget {
                 )
               ],
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                cource.courceName,
-                style: Theme.of(context).textTheme.headline6,
+            FittedBox(
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  cource.courceName,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
               ),
             ),
             SizedBox(
@@ -63,17 +69,19 @@ class CourceItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(cource.instructorUrl),
-                      ),
-                      const SizedBox(width: 6),
-                      Text(
-                        cource.instructorName,
-                        style: Theme.of(context).textTheme.bodyText1,
-                      )
-                    ],
+                  FittedBox(
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(cource.instructorUrl),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          cource.instructorName,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        )
+                      ],
+                    ),
                   ),
                   Row(
                     children: [

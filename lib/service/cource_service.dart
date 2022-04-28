@@ -1,6 +1,6 @@
 import 'package:digital_marketing/dao/models.dart';
 
-import '../screen/onboarding/onboarding_screen.dart';
+import '../screen/home_page.dart';
 
 abstract class CourceService {
   Future<List<CourceModel>> getAllCources();

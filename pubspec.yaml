@@ -23,9 +23,12 @@ dependencies:
   shared_preferences: ^2.0.13
   url_launcher: ^6.0.20
   path_provider: ^2.0.9
-  hydrated_bloc: ^8.1.0
+  shimmer: ^2.0.0
+  # hydrated_bloc: ^8.1.0
+  
   get_it: ^7.2.0  # for dependency Injection and Service Locator
-
+  formz: ^0.4.1
+  uuid: ^3.0.6
   flutter_windowmanager: ^0.2.0 #screen shot
 dev_dependencies:
   flutter_test:
@@ -44,7 +47,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assert/loading.gif
+  
+    - asserts/images/
+    
+
+   
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,4 +1,4 @@
-import 'package:digital_marketing/screen/onboarding/onboarding_screen.dart';
+import '../screen/home_page.dart';
 
 class InstructorModel {
   final String instructorId;

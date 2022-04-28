@@ -1,4 +1,6 @@
+import 'package:digital_marketing/bloc/authentication/authentication_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfilePage extends StatelessWidget {
   static const routeName = '/profile_page';
@@ -207,7 +209,10 @@ class ProfilePage extends StatelessWidget {
             //   height: 20.0,
             // ),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  BlocProvider.of<AuthenticationBloc>(context)
+                      .add(AuthenticationLogoutRequested());
+                },
                 // shape: RoundedRectangleBorder(
                 //     borderRadius: BorderRadius.circular(80.0)),
                 // elevation: 0.0,

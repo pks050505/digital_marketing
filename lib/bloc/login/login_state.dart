@@ -1,47 +1,28 @@
 part of 'login_bloc.dart';
 
-class LoginState {
-  final String email;
-  final String password;
-
-  final FormSubmissionStatus status;
-  bool get isValidEmail => email.contains('@');
-  bool get isValidPassword => password.length > 6;
+class LoginState extends Equatable {
   const LoginState({
-    this.email = '',
-    this.password = '',
-    this.status = const InitialFormStatus(),
+    this.status = FormzStatus.pure,
+    this.username = const Username.pure(),
+    this.password = const Password.pure(),
   });
-  LoginState copywith({
-    String? email,
-    String? password,
-    FormSubmissionStatus? status,
+
+  final FormzStatus status;
+  final Username username;
+  final Password password;
+
+  LoginState copyWith({
+    FormzStatus? status,
+    Username? username,
+    Password? password,
   }) {
     return LoginState(
-      email: email ?? this.email,
-      password: password ?? this.password,
       status: status ?? this.status,
+      username: username ?? this.username,
+      password: password ?? this.password,
     );
   }
-}
 
-abstract class FormSubmissionStatus extends Equatable {
-  const FormSubmissionStatus();
   @override
-  List<Object?> get props => [];
-}
-
-class InitialFormStatus extends FormSubmissionStatus {
-  const InitialFormStatus();
-}
-
-class FormSubmitting extends FormSubmissionStatus {}
-
-class FormSubmissionSuccess extends FormSubmissionStatus {}
-
-class FormSubmissionFailed extends FormSubmissionStatus {
-  final Exception exception;
-  const FormSubmissionFailed(this.exception);
-  @override
-  List<Object?> get props => [exception];
+  List<Object> get props => [status, username, password];
 }

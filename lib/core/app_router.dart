@@ -1,24 +1,27 @@
 import 'package:digital_marketing/dao/models.dart';
 import 'package:digital_marketing/extra_screen/cource_detail_page.dart';
-import 'package:digital_marketing/screen/authentication/login_screen.dart';
-
-import 'package:digital_marketing/screen/onboarding/onboarding_screen.dart';
-import 'package:digital_marketing/screen/root_page/root_page.dart';
+import 'package:digital_marketing/screen/all_course_page.dart';
+import 'package:digital_marketing/welcomepage.dart';
 
 import 'package:flutter/material.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case RootPage.routeName:
-        return RootPage.route();
-      case LoginScreen.routeName:
-        return LoginScreen.route();
-      case OnBoardingScreen.routeName:
-        return OnBoardingScreen.route();
+      // case RootPage.routeName:
+      //   return RootPage.route();
+      // case LoginScreen.routeName:
+      //   return LoginScreen.route();
+      // case OnBoardingScreen.routeName:
+      //   return OnBoardingScreen.route();
       case CourceDetailPage.routeName:
         return CourceDetailPage.route(
             cource: settings.arguments as CourceModel);
+      case WelcomePage.routeName:
+        return WelcomePage.route();
+      case AllCoursePage.routeName:
+        return AllCoursePage.route();
+
       // case HomePage.routeName:
       //   return HomePage.route();
       // case CourcesPage.routeName:

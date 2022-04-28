@@ -1,5 +1,4 @@
 import 'package:digital_marketing/screen/cources_page.dart';
-import 'package:digital_marketing/screen/explore_search.dart';
 import 'package:digital_marketing/screen/home_page.dart';
 import 'package:digital_marketing/screen/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +12,9 @@ class RootPage extends StatefulWidget {
       builder: (_) => const RootPage(),
     );
   }
+  // static Route route() {
+  //   return MaterialPageRoute<void>(builder: (_) => RootPage());
+  // }
 
   @override
   State<RootPage> createState() => _RootPageState();
@@ -45,7 +47,6 @@ class _RootPageState extends State<RootPage> {
     HomePage(),
     CourcesPage(),
     ProfilePage(),
-    ExploreSearchPage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -65,10 +66,10 @@ class _RootPageState extends State<RootPage> {
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.construction), label: 'Cource'),
+                icon: Icon(Icons.construction), label: 'my course'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.verified_user), label: 'Profile'),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),
+                icon: Icon(Icons.verified_user), label: 'profile'),
+            // BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),
           ],
         ),
       ),

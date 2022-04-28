@@ -1,5 +1,5 @@
 import 'package:digital_marketing/dao/models.dart';
-import 'package:digital_marketing/extra_screen/cource_detail_page.dart';
+
 import 'package:flutter/material.dart';
 
 class InstructorItem extends StatelessWidget {
@@ -19,13 +19,9 @@ class InstructorItem extends StatelessWidget {
           //   ),
           //   child: Image.network(courceUrl),
           // ),
-          SizedBox(
-            height: 160,
-            child: FadeInImage.assetNetwork(
-              image: instructor.instructorPic,
-              placeholder: 'assert/loading.gif',
-              fit: BoxFit.cover,
-            ),
+          Image.network(
+            instructor.instructorPic,
+            fit: BoxFit.cover,
           ),
           // const SizedBox(height: 10),
           ListTile(
