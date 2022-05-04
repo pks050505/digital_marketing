@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
+    print(settings.name);
     switch (settings.name) {
       // case RootPage.routeName:
       //   return RootPage.route();
@@ -14,9 +15,12 @@ class AppRouter {
       //   return LoginScreen.route();
       // case OnBoardingScreen.routeName:
       //   return OnBoardingScreen.route();
-      case CourceDetailPage.routeName:
-        return CourceDetailPage.route(
-            cource: settings.arguments as CourceModel);
+      // case CourceDetailPage.routeName:
+      //   return CourceDetailPage.route(
+      //       cource: settings.arguments as CourceModel);
+      case CourceDetailScreen.routeName:
+        return CourceDetailScreen.route(
+            courceModel: settings.arguments as CourceModel);
       case WelcomePage.routeName:
         return WelcomePage.route();
       case AllCoursePage.routeName:

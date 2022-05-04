@@ -7,8 +7,6 @@ abstract class InstructorState extends Equatable {
   List<Object> get props => [];
 }
 
-class InstructorInitial extends InstructorState {}
-
 class InstructorLoadingState extends InstructorState {}
 
 class InstructorLoadedState extends InstructorState {

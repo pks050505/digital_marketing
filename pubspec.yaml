@@ -16,20 +16,22 @@ dependencies:
   
   cupertino_icons: ^1.0.2
   carousel_slider: ^4.0.0 
-  video_player: ^2.3.0
+  better_player: ^0.0.82
   introduction_screen: ^3.0.2
   equatable: ^2.0.3
   flutter_bloc: ^8.0.1
   shared_preferences: ^2.0.13
   url_launcher: ^6.0.20
+  http: ^0.13.4
   path_provider: ^2.0.9
+  google_fonts: ^2.3.2
   shimmer: ^2.0.0
+  marquee: ^2.2.1
   # hydrated_bloc: ^8.1.0
-  
   get_it: ^7.2.0  # for dependency Injection and Service Locator
   formz: ^0.4.1
   uuid: ^3.0.6
-  flutter_windowmanager: ^0.2.0 #screen shot
+  # flutter_windowmanager: ^0.2.0 #screen shot
 dev_dependencies:
   flutter_test:
     sdk: flutter

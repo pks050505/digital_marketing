@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-
 import '../dao/cource_model.dart';
 import '../extra_screen/cource_detail_page.dart';
 
 class CourceItem extends StatelessWidget {
   final double widthFactor;
   final CourceModel cource;
-  const CourceItem({Key? key, required this.cource, required this.widthFactor})
-      : super(key: key);
+  const CourceItem({
+    Key? key,
+    required this.cource,
+    required this.widthFactor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +18,16 @@ class CourceItem extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          CourceDetailPage.routeName,
+          CourceDetailScreen.routeName,
           arguments: cource,
         );
       },
-      child: Container(
-        margin: const EdgeInsets.only(right: 10, bottom: 10),
-        width: width,
+      child: Card(
+        shadowColor: Colors.pinkAccent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        elevation: 6,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -44,8 +49,9 @@ class CourceItem extends StatelessWidget {
                 Positioned(
                   top: 5,
                   left: 5,
-                  child: Container(
-                    color: Colors.amber,
+                  child: Card(
+                    elevation: 5,
+                    color: Colors.amberAccent,
                     child: Text(cource.courceCategory),
                   ),
                 )
@@ -60,46 +66,45 @@ class CourceItem extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
-            SizedBox(
-              width: width,
-              height: 40,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  FittedBox(
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundImage: NetworkImage(cource.instructorUrl),
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          cource.instructorName,
-                          style: Theme.of(context).textTheme.bodyText1,
-                        )
-                      ],
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.star,
-                        color: Colors.orange,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        cource.rating.toString(),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
+            Text(
+              "By ${cource.instructorName}",
+              style: Theme.of(context).textTheme.bodyText1,
+            )
+            // SizedBox(
+            //   height: 40,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Row(
+            //         children: [
+            //           CircleAvatar(
+            //             backgroundImage: NetworkImage(cource.instructorUrl),
+            //           ),
+            //           const SizedBox(width: 6),
+            //           Text(
+            //             cource.instructorName,
+            //             style: Theme.of(context).textTheme.bodyText1,
+            //           )
+            //         ],
+            //       ),
+            //       Row(
+            //         children: [
+            //           const Icon(
+            //             Icons.star,
+            //             color: Colors.orange,
+            //           ),
+            //           const SizedBox(width: 5),
+            //           Text(
+            //             cource.rating.toString(),
+            //           )
+            //         ],
+            //       )
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),

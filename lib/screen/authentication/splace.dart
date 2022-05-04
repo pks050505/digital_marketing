@@ -17,16 +17,13 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.red,
-        child: Center(
-            child: Text(
-          'Splace Screen',
-          style: Theme.of(context).textTheme.headline2!
-            ..copyWith(
-              color: Colors.white,
-            ),
-        )),
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Image.asset(
+          'asserts/images/splace.jpg',
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

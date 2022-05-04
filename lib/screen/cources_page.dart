@@ -1,13 +1,15 @@
 import 'package:digital_marketing/dao/cource_model.dart';
-
 import 'package:digital_marketing/widgets/cource_item.dart';
 import 'package:digital_marketing/widgets/section_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/cource/cource_bloc.dart';
 
 class CourcesPage extends StatelessWidget {
   static const routeName = '/course_page';
   const CourcesPage({Key? key}) : super(key: key);
-  static MaterialPageRoute route() {
+  static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: (_) => const CourcesPage(),
@@ -16,6 +18,7 @@ class CourcesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text("My Course"),
@@ -28,13 +31,41 @@ class CourcesPage extends StatelessWidget {
         // margin: const EdgeInsets.only(left: 8),
         child: Column(
           children: [
-            Container(
+            Expanded(
+              flex: 2,
               child: FeatureText(),
             ),
-            MyCourseWidget(cources: CourceModel.cources)
+            // MyCourseWidget(cources: CourceModel.cources)
             // JoinedCources(
             //   joinedCources: CourceModel.cources,
             // ),
+            BlocBuilder<CourceBloc, CourceState>(
+              builder: (context, state) {
+                if (state is CourceLoadedState) {
+                  return Expanded(
+                    flex: 8,
+                    child: GridView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 5.0,
+                        mainAxisSpacing: 5.0,
+                      ),
+                      itemCount: state.cources.length,
+                      itemBuilder: (_, i) {
+                        return CourceItem(
+                          widthFactor: 1,
+                          cource: state.cources[i],
+                        );
+                      },
+                    ),
+                  );
+                }
+                return CircularProgressIndicator();
+              },
+            )
           ],
         ),
       ),

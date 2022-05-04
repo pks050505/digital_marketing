@@ -5,6 +5,7 @@ import '../screen/home_page.dart';
 abstract class CourceService {
   Future<List<CourceModel>> getAllCources();
   Future<List<InstructorModel>> getAllInstructors();
+  Future<List<CourceModel>> mypurchasedCources();
 }
 
 class CourceServiceImpl implements CourceService {
@@ -21,6 +22,15 @@ class CourceServiceImpl implements CourceService {
   Future<List<InstructorModel>> getAllInstructors() async {
     try {
       return await Future.value(instructors);
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<List<CourceModel>> mypurchasedCources() async {
+    try {
+      return await Future.value(cources);
     } catch (e) {
       throw Exception();
     }

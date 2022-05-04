@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProfilePage extends StatelessWidget {
   static const routeName = '/profile_page';
   const ProfilePage({Key? key}) : super(key: key);
-  static MaterialPageRoute route() {
+  static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: (_) {
@@ -23,7 +23,7 @@ class ProfilePage extends StatelessWidget {
           shrinkWrap: true,
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -50,12 +50,13 @@ class ProfilePage extends StatelessWidget {
                       SizedBox(
                         height: 10.0,
                       ),
-                      Text(
-                        "Purushottam Kumar singh",
-                        style: TextStyle(
-                          fontSize: 22.0,
-                          color: Colors.white,
-                        ),
+                      BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                        builder: (context, state) {
+                          return Text(
+                            state.user.name,
+                            style: Theme.of(context).textTheme.headline5,
+                          );
+                        },
                       ),
                       SizedBox(
                         height: 10.0,

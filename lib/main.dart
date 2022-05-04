@@ -7,11 +7,11 @@ import 'package:digital_marketing/core/app_router.dart';
 import 'package:digital_marketing/repository/authentication_repository.dart';
 import 'package:digital_marketing/repository/user_repository.dart';
 import 'package:digital_marketing/screen/onboarding/onboard_page.dart';
-
 import 'package:digital_marketing/service/cource_service.dart';
 import 'package:digital_marketing/welcomepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'injection_container.dart' as di;
@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          // BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()),
           BlocProvider<OnboardCubit>(
             create: (context) => OnboardCubit(preferences: di.sl()),
           ),
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
             create: (context) => di.sl()..add(LoadCourceEvent()),
           )
         ],
-        child: AppView(),
+        child: const AppView(),
       ),
     );
   }
@@ -83,8 +84,14 @@ class _AppViewState extends State<AppView> {
     return MaterialApp(
       title: 'Digital Marketing App',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.pink),
-      home: seenOnboard! ? WelcomePage() : OnBoardingPage(),
+
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+        textTheme: GoogleFonts.robotoTextTheme(),
+      ),
+
+      // darkTheme: ThemeData.dark(),
+      home: seenOnboard! ? const WelcomePage() : const OnBoardingPage(),
       onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }

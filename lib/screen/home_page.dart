@@ -1,23 +1,25 @@
 import 'package:carousel_slider/carousel_slider.dart';
-
+import 'package:digital_marketing/bloc/theme/theme_cubit.dart';
 import 'package:digital_marketing/dao/models.dart';
-import 'package:digital_marketing/screen/all_course_page.dart';
 
+import 'package:digital_marketing/screen/search_page.dart';
 import 'package:digital_marketing/service/cource_service.dart';
-
 import 'package:digital_marketing/widgets/cource_item.dart';
 
 import 'package:digital_marketing/widgets/instructor_item.dart';
 import 'package:digital_marketing/widgets/section_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 String imageUrll =
-    'https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072821__480.jpg';
+    'https://images.ctfassets.net/hrltx12pl8hq/a2hkMAaruSQ8haQZ4rBL9/8ff4a6f289b9ca3f4e6474f29793a74a/nature-image-for-website.jpg?fit=fill&w=480&h=320';
+String imagelink =
+    'https://media.istockphoto.com/photos/woman-in-red-jacket-is-standing-on-the-coast-of-braies-lake-at-in-picture-id1128740636?s=612x612';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home_page';
   const HomePage({Key? key}) : super(key: key);
-  static MaterialPageRoute route() {
+  static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: (_) {
@@ -35,6 +37,14 @@ class HomePage extends StatelessWidget {
         title: const Text('I DIGITAL PRENEUR'),
         centerTitle: true,
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: () {
+              // context.read<ThemeCubit>().changeTheme();
+            },
+            icon: const Icon(Icons.abc),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -60,7 +70,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               options: CarouselOptions(
-                height: 200,
+                height: 160,
                 onPageChanged: (i, reson) {},
                 aspectRatio: 16 / 9,
                 viewportFraction: 0.9,
@@ -68,13 +78,13 @@ class HomePage extends StatelessWidget {
                 enableInfiniteScroll: true,
                 reverse: false,
                 autoPlay: true,
-                autoPlayInterval: const Duration(seconds: 3),
-                autoPlayAnimationDuration: const Duration(microseconds: 800),
+                // autoPlayInterval: const Duration(seconds: 3),
+                // autoPlayAnimationDuration: const Duration(microseconds: 800),
                 autoPlayCurve: Curves.fastOutSlowIn,
                 scrollDirection: Axis.horizontal,
               ),
             ),
-            TrendingCourceWidget(),
+//const TrendingCourceWidget(),
 
             // CourcePackageType(),
             const AllCourcesWidget(),
@@ -105,14 +115,21 @@ class AllCourcesWidget extends StatelessWidget {
             const SectionTitle(title: 'All Courses'),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, AllCoursePage.routeName);
+                // Navigator.pushNamed(context, AllCoursePage.routeName);
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return SearchPage();
+                }));
               },
-              child: const Text('show All'),
+              child: Icon(
+                Icons.search,
+                size: 25,
+                color: Colors.black,
+              ),
             )
           ],
         ),
-        Container(
-          height: 240,
+        SizedBox(
+          height: 200,
           child: ListView.builder(
             shrinkWrap: true,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -120,6 +137,10 @@ class AllCourcesWidget extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: CourceModel.cources.length,
             itemBuilder: (_, i) {
+              // return ColoredBox(
+              //   color: Colors.green,
+              //   child: CourceItemTest(),
+              // );
               return CourceItem(
                 cource: CourceModel.cources[i],
                 widthFactor: 2,

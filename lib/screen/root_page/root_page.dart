@@ -1,6 +1,7 @@
 import 'package:digital_marketing/screen/cources_page.dart';
 import 'package:digital_marketing/screen/home_page.dart';
 import 'package:digital_marketing/screen/profile_page.dart';
+import 'package:digital_marketing/screen/search_page.dart';
 import 'package:flutter/material.dart';
 
 class RootPage extends StatefulWidget {
@@ -46,6 +47,7 @@ class _RootPageState extends State<RootPage> {
   final screens = const [
     HomePage(),
     CourcesPage(),
+    SearchPage(),
     ProfilePage(),
   ];
   @override
@@ -67,6 +69,7 @@ class _RootPageState extends State<RootPage> {
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.construction), label: 'my course'),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.verified_user), label: 'profile'),
             // BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),

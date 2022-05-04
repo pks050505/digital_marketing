@@ -1,5 +1,4 @@
 import 'package:digital_marketing/dao/models.dart';
-
 import 'package:flutter/material.dart';
 
 class InstructorItem extends StatelessWidget {

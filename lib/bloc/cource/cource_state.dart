@@ -13,7 +13,7 @@ class CourceLoadedState extends CourceState {
   final List<CourceModel> cources;
   const CourceLoadedState(this.cources);
   @override
-  List<Object> get props => [cources];
+  List<Object> get props => [];
 }
 
 class CourceErrorState extends CourceState {

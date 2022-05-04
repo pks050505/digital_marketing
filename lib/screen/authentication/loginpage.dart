@@ -95,9 +95,12 @@ class _UsernameInput extends StatelessWidget {
           onChanged: (username) =>
               context.read<LoginBloc>().add(LoginUsernameChanged(username)),
           decoration: InputDecoration(
+            prefixIcon: const Icon(Icons.email),
             labelText: 'username',
-            errorText: state.username.invalid ? 'invalid username' : null,
-            border: const OutlineInputBorder(),
+            // errorText: state.username.invalid ? 'invalid username' : null,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
           ),
         );
       },
@@ -109,21 +112,45 @@ class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.password != current.password,
+      buildWhen: ((previous, current) => previous.password != current.password),
       builder: (context, state) {
-        return TextField(
-          key: const Key('loginForm_passwordInput_textField'),
-          onChanged: (password) =>
-              context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+        return TextFormField(
           obscureText: true,
           decoration: InputDecoration(
-            labelText: 'password',
-            errorText: state.password.invalid ? 'invalid password' : null,
-            border: const OutlineInputBorder(),
+            prefixIcon: const Icon(Icons.password),
+            hintText: 'password',
+            label: Text(
+              'Password',
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
           ),
+          validator: (value) =>
+              state.password.invalid ? 'Invalid Password' : null,
+          keyboardType: TextInputType.emailAddress,
+          onChanged: (password) {
+            context.read<LoginBloc>().add(LoginPasswordChanged(password));
+          },
         );
       },
     );
+    // return BlocBuilder<LoginBloc, LoginState>(
+    //   buildWhen: (previous, current) => previous.password != current.password,
+    //   builder: (context, state) {
+    //     return TextField(
+    //       key: const Key('loginForm_passwordInput_textField'),
+    //       onChanged: (password) =>
+    //           context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+    //       obscureText: true,
+    //       decoration: InputDecoration(
+    //         labelText: 'password',
+    //         errorText: state.password.invalid ? 'invalid password' : null,
+    //         border: const OutlineInputBorder(),
+    //       ),
+    //     );
+    //   },
+    // );
   }
 }
 
