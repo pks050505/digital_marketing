@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../api/auth_repository.dart';
 import '../../bloc/login/login_bloc.dart';
-import '../../repository/authentication_repository.dart';
 
 class LoginPage extends StatelessWidget {
   static const String routeName = 'login';
@@ -22,18 +23,11 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
+      body: SingleChildScrollView(
         child: BlocProvider(
           create: (context) {
             return LoginBloc(
-              authenticationRepository:
-                  RepositoryProvider.of<AuthenticationRepository>(context),
+              authRepository: RepositoryProvider.of<AuthRepository>(context),
             );
           },
           child: LoginForm(),
@@ -56,11 +50,18 @@ class LoginForm extends StatelessWidget {
             );
         }
       },
-      child: Align(
-        alignment: const Alignment(0, -1 / 3),
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 50, horizontal: 10),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset(
+              'asserts/images/idplogo.png',
+              color: Colors.redAccent.shade400,
+              fit: BoxFit.cover,
+              height: 250,
+            ),
             _UsernameInput(),
             const Padding(padding: EdgeInsets.all(12)),
             _PasswordInput(),

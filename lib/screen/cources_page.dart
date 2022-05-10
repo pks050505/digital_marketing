@@ -27,47 +27,25 @@ class CourcesPage extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
 
-      body: Container(
-        // margin: const EdgeInsets.only(left: 8),
-        child: Column(
-          children: [
-            Expanded(
-              flex: 2,
-              child: FeatureText(),
-            ),
-            // MyCourseWidget(cources: CourceModel.cources)
-            // JoinedCources(
-            //   joinedCources: CourceModel.cources,
-            // ),
-            BlocBuilder<CourceBloc, CourceState>(
-              builder: (context, state) {
-                if (state is CourceLoadedState) {
-                  return Expanded(
-                    flex: 8,
-                    child: GridView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 5.0,
-                        mainAxisSpacing: 5.0,
-                      ),
-                      itemCount: state.cources.length,
-                      itemBuilder: (_, i) {
-                        return CourceItem(
-                          widthFactor: 1,
-                          cource: state.cources[i],
-                        );
-                      },
-                    ),
-                  );
-                }
-                return CircularProgressIndicator();
-              },
-            )
-          ],
-        ),
+      body: OrientationBuilder(
+        builder: (context, orientation) {
+          if (orientation == Orientation.landscape) {
+            return Row(
+              children: [
+                FeatureText(),
+                const Expanded(
+                  child: Buildtilelistview(),
+                )
+              ],
+            );
+          }
+          return Column(
+            children: [
+              FeatureText(),
+              const Buildtilelistview(),
+            ],
+          );
+        },
       ),
       // body: GridView.builder(
       //   physics: BouncingScrollPhysics(),
@@ -84,6 +62,42 @@ class CourcesPage extends StatelessWidget {
       //     );
       //   },
       // ),
+    );
+  }
+}
+
+class Buildtilelistview extends StatelessWidget {
+  const Buildtilelistview({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CourceBloc, CourceState>(
+      builder: (context, state) {
+        if (state is CourceLoadedState) {
+          return OrientationBuilder(builder: (context, orientation) {
+            return GridView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+                crossAxisSpacing: 5.0,
+                mainAxisSpacing: 5.0,
+              ),
+              itemCount: state.cources.length,
+              itemBuilder: (_, i) {
+                return CourceItem(
+                  widthFactor: 1,
+                  cource: state.cources[i],
+                );
+              },
+            );
+          });
+        }
+        return CircularProgressIndicator();
+      },
     );
   }
 }
@@ -152,8 +166,8 @@ class AllCources extends StatelessWidget {
     return Flexible(
       child: Column(
         children: [
-          SectionTitle(title: 'All Cources'),
-          SizedBox(height: 10),
+          const SectionTitle(title: 'All Cources'),
+          const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -177,7 +191,7 @@ class FeatureText extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        style: Theme.of(context).textTheme.headline4,
+        style: Theme.of(context).textTheme.headline5,
         children: <TextSpan>[
           TextSpan(
             text: 'Hi ,',
@@ -188,7 +202,7 @@ class FeatureText extends StatelessWidget {
           TextSpan(
             text: ' Purushottam \n',
             style:
-                TextStyle(color: Theme.of(context).primaryColor, fontSize: 40),
+                TextStyle(color: Theme.of(context).primaryColor, fontSize: 25),
           ),
           TextSpan(
             text: 'Welcome to ',
@@ -198,7 +212,7 @@ class FeatureText extends StatelessWidget {
           ),
           TextSpan(
             text: ' IDP\n',
-            style: TextStyle(color: Colors.redAccent, fontSize: 40),
+            style: TextStyle(color: Colors.redAccent, fontSize: 25),
           ),
         ],
       ),

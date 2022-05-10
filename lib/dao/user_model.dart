@@ -5,38 +5,45 @@ class UserModel {
   final String? email;
   final String? phoneNo;
   final String? image;
-  UserModel({
+  final String? packageType;
+  const UserModel({
     this.address,
     this.email,
     this.image,
     this.name,
     this.phoneNo,
     this.userId,
+    this.packageType,
   });
-  UserModel copyWith(
-      {String? userId,
-      String? name,
-      String? address,
-      String? email,
-      String? phoneNo,
-      String? image}) {
+  UserModel copyWith({
+    String? userId,
+    String? name,
+    String? address,
+    String? email,
+    String? phoneNo,
+    String? image,
+    String? packageType,
+  }) {
     return UserModel(
       email: userId ?? this.userId,
       name: name ?? this.name,
       address: address ?? this.address,
       image: image ?? this.image,
       phoneNo: phoneNo ?? this.phoneNo,
+      packageType: packageType ?? this.packageType,
     );
   }
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-        name: json['name'],
-        email: json['email'],
-        address: json['address'],
-        image: json['image'],
-        phoneNo: json['phoneNo'],
-        userId: json['userId']);
+      name: json['name'],
+      email: json['email'],
+      address: json['address'],
+      image: json['image'],
+      phoneNo: json['phoneNo'],
+      userId: json['userId'],
+      packageType: json['packageType'],
+    );
   }
 }
 

@@ -1,26 +1,28 @@
 import 'package:bloc/bloc.dart';
+import 'package:digital_marketing/api/api.dart';
+
 import 'package:equatable/equatable.dart';
 
 import 'package:formz/formz.dart';
 
+import '../../api/auth_repository.dart';
 import '../../models/password.dart';
 import '../../models/username.dart';
-import '../../repository/authentication_repository.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({
-    required AuthenticationRepository authenticationRepository,
-  })  : _authenticationRepository = authenticationRepository,
+    required AuthRepository authRepository,
+  })  : _authRepository = authRepository,
         super(const LoginState()) {
     on<LoginUsernameChanged>(_onUsernameChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<LoginSubmitted>(_onSubmitted);
   }
 
-  final AuthenticationRepository _authenticationRepository;
+  final AuthRepository _authRepository;
 
   void _onUsernameChanged(
     LoginUsernameChanged event,
@@ -51,10 +53,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
-        await _authenticationRepository.logIn(
-          username: state.username.value,
+        await _authRepository.signIn(
+          email: state.username.value,
           password: state.password.value,
         );
+
         emit(state.copyWith(status: FormzStatus.submissionSuccess));
       } catch (_) {
         emit(state.copyWith(status: FormzStatus.submissionFailure));

@@ -6,6 +6,8 @@ abstract class VideoEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class InitialEvent extends VideoEvent {}
+
 class NextVideo extends VideoEvent {
   final String videoUrl;
   const NextVideo(this.videoUrl);

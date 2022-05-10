@@ -1,17 +1,14 @@
 import 'package:digital_marketing/screen/cources_page.dart';
 import 'package:digital_marketing/screen/home_page.dart';
 import 'package:digital_marketing/screen/profile_page.dart';
-import 'package:digital_marketing/screen/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
   static const routeName = '/root_page';
-  static MaterialPageRoute route() {
-    return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
-      builder: (_) => const RootPage(),
-    );
+  static Route route() {
+    return RootPage.route();
   }
   // static Route route() {
   //   return MaterialPageRoute<void>(builder: (_) => RootPage());
@@ -22,6 +19,26 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+
+  @override
+  dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
+
   Future<bool> _onWillPop() async {
     return (await showDialog(
           context: context,
@@ -47,7 +64,6 @@ class _RootPageState extends State<RootPage> {
   final screens = const [
     HomePage(),
     CourcesPage(),
-    SearchPage(),
     ProfilePage(),
   ];
   @override
@@ -66,12 +82,19 @@ class _RootPageState extends State<RootPage> {
           type: BottomNavigationBarType.fixed,
           onTap: (index) => setState(() => currentIndex = index),
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.construction), label: 'my course'),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),
+              icon: Icon(Icons.home),
+              label: 'home',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.verified_user), label: 'profile'),
+              icon: Icon(Icons.construction),
+              label: 'my course',
+            ),
+            // BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.verified_user),
+              label: 'profile',
+            ),
             // BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),
           ],
         ),

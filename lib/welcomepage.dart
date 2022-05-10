@@ -1,7 +1,8 @@
+import 'package:digital_marketing/api/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'bloc/authentication/authentication_bloc.dart';
-import 'repository/authentication_repository.dart';
 import 'screen/authentication/loginpage.dart';
 import 'screen/authentication/splace.dart';
 import 'screen/root_page/root_page.dart';

@@ -12,6 +12,8 @@
    <application
         android:label="Digital Marketing App"
         android:name="${applicationName}"
+        android:usesCleartextTraffic="true"
+        android:largeHeap="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

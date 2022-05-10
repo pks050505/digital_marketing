@@ -37,141 +37,148 @@ class ProfilePage extends StatelessWidget {
                 width: double.infinity,
                 height: 350.0,
                 child: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          "https://randomuser.me/api/portraits/men/47.jpg",
-                        ),
-                        radius: 50.0,
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                        builder: (context, state) {
-                          return Text(
-                            state.user.name,
+                  child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                    builder: (context, state) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              state.user.image!,
+                              // "https://randomuser.me/api/portraits/men/47.jpg",
+                            ),
+                            radius: 50.0,
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            state.user.name!,
                             style: Theme.of(context).textTheme.headline5,
-                          );
-                        },
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      // Card(
-                      //   margin: EdgeInsets.symmetric(
-                      //       horizontal: 20.0, vertical: 5.0),
-                      //   clipBehavior: Clip.antiAlias,
-                      //   color: Colors.white,
-                      //   elevation: 5.0,
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.symmetric(
-                      //         horizontal: 8.0, vertical: 22.0),
-                      //     child: Row(
-                      //       children: [
-                      //         Expanded(
-                      //           child: Column(
-                      //             children: [
-                      //               Text(
-                      //                 "Posts",
-                      //                 style: TextStyle(
-                      //                   color: Colors.redAccent,
-                      //                   fontSize: 22.0,
-                      //                   fontWeight: FontWeight.bold,
-                      //                 ),
-                      //               ),
-                      //               SizedBox(
-                      //                 height: 5.0,
-                      //               ),
-                      //               Text(
-                      //                 "1200",
-                      //                 style: TextStyle(
-                      //                   fontSize: 20.0,
-                      //                   color: Colors.pinkAccent,
-                      //                 ),
-                      //               )
-                      //             ],
-                      //           ),
-                      //         ),
-                      //         Expanded(
-                      //           child: Column(
-                      //             children: [
-                      //               Text(
-                      //                 "Followers",
-                      //                 style: TextStyle(
-                      //                   color: Colors.redAccent,
-                      //                   fontSize: 22.0,
-                      //                   fontWeight: FontWeight.bold,
-                      //                 ),
-                      //               ),
-                      //               SizedBox(
-                      //                 height: 5.0,
-                      //               ),
-                      //               Text(
-                      //                 "21.2K",
-                      //                 style: TextStyle(
-                      //                   fontSize: 20.0,
-                      //                   color: Colors.pinkAccent,
-                      //                 ),
-                      //               )
-                      //             ],
-                      //           ),
-                      //         ),
-                      //         Expanded(
-                      //           child: Column(
-                      //             children: [
-                      //               Text(
-                      //                 "Follow",
-                      //                 style: TextStyle(
-                      //                   color: Colors.redAccent,
-                      //                   fontSize: 22.0,
-                      //                   fontWeight: FontWeight.bold,
-                      //                 ),
-                      //               ),
-                      //               SizedBox(
-                      //                 height: 5.0,
-                      //               ),
-                      //               Text(
-                      //                 "1200",
-                      //                 style: TextStyle(
-                      //                   fontSize: 20.0,
-                      //                   color: Colors.pinkAccent,
-                      //                 ),
-                      //               )
-                      //             ],
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // )
-                    ],
+                          ),
+
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          // Card(
+                          //   margin: EdgeInsets.symmetric(
+                          //       horizontal: 20.0, vertical: 5.0),
+                          //   clipBehavior: Clip.antiAlias,
+                          //   color: Colors.white,
+                          //   elevation: 5.0,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.symmetric(
+                          //         horizontal: 8.0, vertical: 22.0),
+                          //     child: Row(
+                          //       children: [
+                          //         Expanded(
+                          //           child: Column(
+                          //             children: [
+                          //               Text(
+                          //                 "Posts",
+                          //                 style: TextStyle(
+                          //                   color: Colors.redAccent,
+                          //                   fontSize: 22.0,
+                          //                   fontWeight: FontWeight.bold,
+                          //                 ),
+                          //               ),
+                          //               SizedBox(
+                          //                 height: 5.0,
+                          //               ),
+                          //               Text(
+                          //                 "1200",
+                          //                 style: TextStyle(
+                          //                   fontSize: 20.0,
+                          //                   color: Colors.pinkAccent,
+                          //                 ),
+                          //               )
+                          //             ],
+                          //           ),
+                          //         ),
+                          //         Expanded(
+                          //           child: Column(
+                          //             children: [
+                          //               Text(
+                          //                 "Followers",
+                          //                 style: TextStyle(
+                          //                   color: Colors.redAccent,
+                          //                   fontSize: 22.0,
+                          //                   fontWeight: FontWeight.bold,
+                          //                 ),
+                          //               ),
+                          //               SizedBox(
+                          //                 height: 5.0,
+                          //               ),
+                          //               Text(
+                          //                 "21.2K",
+                          //                 style: TextStyle(
+                          //                   fontSize: 20.0,
+                          //                   color: Colors.pinkAccent,
+                          //                 ),
+                          //               )
+                          //             ],
+                          //           ),
+                          //         ),
+                          //         Expanded(
+                          //           child: Column(
+                          //             children: [
+                          //               Text(
+                          //                 "Follow",
+                          //                 style: TextStyle(
+                          //                   color: Colors.redAccent,
+                          //                   fontSize: 22.0,
+                          //                   fontWeight: FontWeight.bold,
+                          //                 ),
+                          //               ),
+                          //               SizedBox(
+                          //                 height: 5.0,
+                          //               ),
+                          //               Text(
+                          //                 "1200",
+                          //                 style: TextStyle(
+                          //                   fontSize: 20.0,
+                          //                   color: Colors.pinkAccent,
+                          //                 ),
+                          //               )
+                          //             ],
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // )
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
             ),
-            Card(
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-              clipBehavior: Clip.antiAlias,
-              color: Colors.white,
-              elevation: 5.0,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 22.0),
-                child: Column(
-                  children: [
-                    ProfileTile(title: 'email', value: 'pks050505@gmail.com'),
-                    SizedBox(height: 10),
-                    ProfileTile(title: 'phone', value: '9123456789'),
-                    SizedBox(height: 10),
-                    ProfileTile(title: 'package', value: 'Elite'),
-                  ],
-                ),
-              ),
+            BlocBuilder<AuthenticationBloc, AuthenticationState>(
+              builder: (context, state) {
+                return Card(
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 5.0),
+                  clipBehavior: Clip.antiAlias,
+                  color: Colors.white,
+                  elevation: 5.0,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 22.0),
+                    child: Column(
+                      children: [
+                        ProfileTile(title: 'email', value: state.user.email!),
+                        SizedBox(height: 10),
+                        ProfileTile(title: 'phone', value: state.user.phoneNo!),
+                        SizedBox(height: 10),
+                        ProfileTile(
+                            title: 'package', value: state.user.packageType!),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
             // Container(
             //   child: Padding(
@@ -210,32 +217,23 @@ class ProfilePage extends StatelessWidget {
             //   height: 20.0,
             // ),
             ElevatedButton(
-                onPressed: () {
-                  BlocProvider.of<AuthenticationBloc>(context)
-                      .add(AuthenticationLogoutRequested());
-                },
-                // shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(80.0)),
-                // elevation: 0.0,
-                // padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft,
-                      colors: [Colors.pink, Colors.pinkAccent],
-                    ),
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: Text(
-                    "LogOut",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 26.0,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                )),
+              onPressed: () {
+                BlocProvider.of<AuthenticationBloc>(context)
+                    .add(AuthenticationLogoutRequested());
+              },
+              // shape: RoundedRectangleBorder(
+              //     borderRadius: BorderRadius.circular(80.0)),
+              // elevation: 0.0,
+              // padding: EdgeInsets.all(0.0),
+              child: Text(
+                "LogOut",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 26.0,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
           ],
         ),
       ),

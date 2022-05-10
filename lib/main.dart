@@ -2,10 +2,10 @@ import 'package:digital_marketing/bloc/authentication/authentication_bloc.dart';
 import 'package:digital_marketing/bloc/cource/cource_bloc.dart';
 import 'package:digital_marketing/bloc/instructor/instructor_bloc.dart';
 import 'package:digital_marketing/bloc/onboard/onboard_cubit.dart';
+
 import 'package:digital_marketing/bloc_observer.dart';
 import 'package:digital_marketing/core/app_router.dart';
-import 'package:digital_marketing/repository/authentication_repository.dart';
-import 'package:digital_marketing/repository/user_repository.dart';
+
 import 'package:digital_marketing/screen/onboarding/onboard_page.dart';
 import 'package:digital_marketing/service/cource_service.dart';
 import 'package:digital_marketing/welcomepage.dart';
@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'api/auth_repository.dart';
 import 'injection_container.dart' as di;
 
 bool? seenOnboard;
@@ -35,9 +36,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<AuthenticationRepository>(
-            create: (context) => di.sl()),
-        RepositoryProvider<UserRepository>(
+        // RepositoryProvider<AuthRepository>(create: (context) => di.sl()),
+        // RepositoryProvider<UserRepository>(
+        //   create: (context) => di.sl(),
+        // ),
+        RepositoryProvider<AuthRepository>(
           create: (context) => di.sl(),
         ),
         RepositoryProvider<CourceService>(create: (context) => di.sl())
@@ -50,9 +53,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<AuthenticationBloc>(
             create: (context) => AuthenticationBloc(
-              authenticationRepository:
-                  context.read<AuthenticationRepository>(),
-              userRepository: context.read<UserRepository>(),
+              authRepository: context.read<AuthRepository>(),
             ),
           ),
           BlocProvider<InstructorBloc>(create: (context) => di.sl()
@@ -60,7 +61,7 @@ class MyApp extends StatelessWidget {
               ),
           BlocProvider<CourceBloc>(
             create: (context) => di.sl()..add(LoadCourceEvent()),
-          )
+          ),
         ],
         child: const AppView(),
       ),

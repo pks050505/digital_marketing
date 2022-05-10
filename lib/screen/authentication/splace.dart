@@ -21,7 +21,7 @@ class SplashPage extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         child: Image.asset(
-          'asserts/images/splace.jpg',
+          'asserts/images/splaceicon.jpg',
           fit: BoxFit.cover,
         ),
       ),
