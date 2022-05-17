@@ -1,5 +1,5 @@
 import 'package:digital_marketing/dao/models.dart';
-import 'package:digital_marketing/extra_screen/cource_detail_page.dart';
+import 'package:digital_marketing/screen/cource_detail_page.dart';
 import 'package:digital_marketing/screen/all_course_page.dart';
 import 'package:digital_marketing/screen/search_page.dart';
 import 'package:digital_marketing/welcomepage.dart';

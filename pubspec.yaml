@@ -27,9 +27,10 @@ dependencies:
   google_fonts: ^2.3.2
   shimmer: ^2.0.0
   marquee: ^2.2.1
+  webview_flutter: ^3.0.4
   # hydrated_bloc: ^8.1.0
   get_it: ^7.2.0  # for dependency Injection and Service Locator
-  formz: ^0.4.1
+ 
   uuid: ^3.0.6
   connectivity_plus: ^2.3.0
   # flutter_windowmanager: ^0.2.0 #screen shot

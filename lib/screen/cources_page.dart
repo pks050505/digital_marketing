@@ -3,7 +3,6 @@ import 'package:digital_marketing/widgets/cource_item.dart';
 import 'package:digital_marketing/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../bloc/cource/cource_bloc.dart';
 
 class CourcesPage extends StatelessWidget {
@@ -21,31 +20,52 @@ class CourcesPage extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Course"),
+        title: const Text("Our Cources"),
         centerTitle: true,
         //some error found need to fix
         automaticallyImplyLeading: false,
+        // bottom: PreferredSize(
+        //   preferredSize: Size.fromHeight(50),
+        //   child: Text(
+        //     "Learn the art of self empowerment ,\n don’t delay enrol now in our courses\n and move a step closer towards Aatmanirbharta.",
+        //   ),
+        // ),
       ),
 
-      body: OrientationBuilder(
-        builder: (context, orientation) {
-          if (orientation == Orientation.landscape) {
-            return Row(
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: OrientationBuilder(
+          builder: (context, orientation) {
+            if (orientation == Orientation.landscape) {
+              return Row(
+                children: [
+                  FeatureText(),
+                  const Expanded(
+                    child: Buildtilelistview(),
+                  )
+                ],
+              );
+            }
+            return Column(
               children: [
-                FeatureText(),
-                const Expanded(
-                  child: Buildtilelistview(),
-                )
+                // Card(
+                //   margin: const EdgeInsets.all(10),
+                //   color: Colors.red.shade100,
+                //   child: const Flexible(
+                //       child: Padding(
+                //     padding: EdgeInsets.all(8.0),
+                //     child: Text(
+                //       "Learn the art of self empowerment , don’t delay enrol now in our courses and move a step closer towards Aatmanirbharta.",
+                //       style: TextStyle(fontSize: 18),
+                //     ),
+                //   )),
+                // ),
+                // FeatureText(),
+                const Buildtilelistview(),
               ],
             );
-          }
-          return Column(
-            children: [
-              FeatureText(),
-              const Buildtilelistview(),
-            ],
-          );
-        },
+          },
+        ),
       ),
       // body: GridView.builder(
       //   physics: BouncingScrollPhysics(),

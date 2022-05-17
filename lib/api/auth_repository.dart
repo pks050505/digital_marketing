@@ -1,10 +1,12 @@
 import 'dart:async';
-
-import 'package:digital_marketing/api/api.dart';
+import 'dart:convert';
 
 import '../dao/user_model.dart';
+import 'base_api.dart';
+import 'package:http/http.dart' as http;
 
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
+const authUrl = "https://www.idigitalpreneur.com/api/login";
 
 class AuthRepository extends BaseApi {
   final _controller = StreamController<AuthenticationStatus>();
@@ -19,11 +21,30 @@ class AuthRepository extends BaseApi {
   }
 
   @override
-  Future<void> signIn({required String email, required String password}) async {
-    await Future.delayed(
-      const Duration(seconds: 2),
-      () => _controller.add(AuthenticationStatus.authenticated),
-    );
+  Future<String> signIn(
+      {required String email, required String password}) async {
+    final responce = await http.post(Uri.parse(authUrl), body: {
+      "email": email,
+      "password": password
+    }, headers: {
+      "Accept": "application/json",
+      "Content-Type": "Application/x-www-form-urlencoded",
+    });
+
+    if (responce.statusCode == 200) {
+      Map output = jsonDecode(responce.body);
+      if (output['error'] == 404 || output['error'] == 204) {
+        return output['message'];
+      } else {
+        return output['message'];
+      }
+    } else {
+      return 'server Error';
+    }
+    // await Future.delayed(
+    //   const Duration(seconds: 2),
+    //   () => _controller.add(AuthenticationStatus.authenticated),
+    // );
   }
 
   @override

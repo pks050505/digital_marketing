@@ -6,6 +6,7 @@ import 'package:digital_marketing/bloc/video/video_state.dart';
 import 'package:digital_marketing/dao/models.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 String videoUrl =
@@ -75,34 +76,90 @@ class LinkAndAboutRowButton extends StatelessWidget {
       children: [
         TextButton(
             onPressed: () {
-              // showModalBottomSheet<void>(
-              //   context: context,
-              //   builder: (BuildContext context) {
-              //     return Container(
-              //       height: 300,
-              //       child: Center(
-              //         child: Text(''),
-              //       ),
-              //     );
-              //   },
-              // );
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return SimpleDialog(
+                      title: Text('Cource url'),
+                      titleTextStyle: const TextStyle(color: Colors.green),
+                      children: [
+                        Row(
+                          children: [
+                            const Text('https://www.idp.com/cources'),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Clipboard.setData(
+                                  ClipboardData(
+                                    text: 'https://www.idp.com/cources',
+                                  ),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Copied')));
+                              },
+                              icon: const Icon(Icons.copy),
+                            )
+                          ],
+                        )
+                      ],
+                    );
+                  });
             },
-            child: const Text('Links')),
+            child: const Text('Cource Links')),
         // Expanded(child: Container()),
         ElevatedButton(
           style: ElevatedButton.styleFrom(),
           onPressed: () {
-            // showModalBottomSheet<void>(
-            //   context: context,
-            //   builder: (BuildContext context) {
-            //     return Container(
-            //       height: 600,
-            //       child: Center(
-            //         child: Text(''),
-            //       ),
-            //     );
-            //   },
-            // );
+            showModalBottomSheet<void>(
+              context: context,
+              builder: (context) {
+                return ListView(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 10,
+                  ),
+                  shrinkWrap: true,
+                  children: [
+                    Text(
+                      'Overview',
+                      style: TextStyle(fontSize: 20),
+                      textAlign: TextAlign.left,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "In this course, you will learn how to trade the Stock Market. It's a course designed for Complete Beginners and Intermediate market participants.We start off by covering basic concepts and work our way up to more advanced level material.By the end of this course, you will completely understand how the Stock Market works. You will understand what a Stock is, why you need a Broker, and what are Exchanges \n You will learn about Orders to buy and sell stocks and how they determine the price of a stock. Furthermore, you will get a list of Recommended Resources.We then cover Technical Analysis, including Charts and Candlesticks, Trends, Supports & Resistances, Chart Patterns, Volume, etc.",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    Text(
+                      'Instructor',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Text(
+                      'Piyus Goel',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Duration',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Text(
+                      '1.8 Hours',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                );
+              },
+            );
           },
           child: const Text('About Cource'),
         )

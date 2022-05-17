@@ -1,6 +1,5 @@
-import 'package:digital_marketing/api/api.dart';
 import 'package:digital_marketing/bloc/cource/cource_bloc.dart';
-import 'package:digital_marketing/bloc/instructor/instructor_bloc.dart';
+
 import 'package:digital_marketing/bloc/onboard/onboard_cubit.dart';
 
 import 'package:digital_marketing/service/cource_service.dart';
@@ -28,7 +27,7 @@ Future<void> init() async {
   sl.registerFactory<OnboardCubit>(() => OnboardCubit(
         preferences: sl(),
       ));
-  sl.registerFactory<InstructorBloc>(() => InstructorBloc(sl()));
+  // sl.registerFactory<InstructorBloc>(() => InstructorBloc(sl()));
   sl.registerFactory<CourceBloc>(() => CourceBloc(sl()));
   sl.registerLazySingleton<AuthRepository>(() => AuthRepository());
   //repository

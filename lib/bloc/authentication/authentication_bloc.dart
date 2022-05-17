@@ -4,7 +4,6 @@ import 'package:digital_marketing/dao/models.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../api/api.dart';
 import '../../api/auth_repository.dart';
 
 part 'authentication_state.dart';
