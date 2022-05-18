@@ -1,12 +1,9 @@
 import 'package:better_player/better_player.dart';
-
 import 'package:digital_marketing/bloc/video/video_bloc.dart';
 import 'package:digital_marketing/bloc/video/video_event.dart';
 import 'package:digital_marketing/bloc/video/video_state.dart';
 import 'package:digital_marketing/dao/models.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 String videoUrl =
@@ -40,133 +37,261 @@ class _CourceDetailScreenState extends State<CourceDetailScreen>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: Column(
-        children: [
-          const BuildVideoView(),
-          const LinkAndAboutRowButton(),
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: videosLinks.length,
-              itemBuilder: (context, index) {
-                return LessionTile(index: index);
-              },
+    return DefaultTabController(
+      length: 3,
+      child: SafeArea(
+        child: Scaffold(
+            body: Column(
+          children: [
+            const BuildVideoView(),
+            SizedBox(
+              height: 60,
+              child: AppBar(
+                backgroundColor: Colors.white,
+                bottom: const TabBar(
+                  indicatorColor: Colors.black,
+                  tabs: [
+                    TabWidget(title: 'Lessons'),
+                    TabWidget(title: 'Links'),
+                    TabWidget(title: 'About')
+                  ],
+                ),
+              ),
             ),
-          )
-          // Expanded(
-          //   child: LessionListView(widget: widget),
-          // ),
-        ],
-      )),
+            const Expanded(
+              child: TabBarView(
+                children: [
+                  LessonsTabView(),
+                  Text('data 2'),
+                  AboutTabView(),
+                ],
+              ),
+            ),
+//
+            // Expanded(
+            //   child: LessionListView(widget: widget),
+            // ),
+          ],
+        )),
+      ),
     );
   }
 }
 
-class LinkAndAboutRowButton extends StatelessWidget {
-  const LinkAndAboutRowButton({
+class LessonsTabView extends StatelessWidget {
+  const LessonsTabView({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: videosLinks.length,
+      itemBuilder: (context, index) {
+        return LessionTestTile(index: index);
+      },
+    );
+  }
+}
+
+class AboutTabView extends StatefulWidget {
+  const AboutTabView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<AboutTabView> createState() => _AboutTabViewState();
+}
+
+class _AboutTabViewState extends State<AboutTabView> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 10,
+      ),
+      shrinkWrap: true,
       children: [
-        TextButton(
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return SimpleDialog(
-                      title: Text('Cource url'),
-                      titleTextStyle: const TextStyle(color: Colors.green),
-                      children: [
-                        Row(
-                          children: [
-                            const Text('https://www.idp.com/cources'),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                Clipboard.setData(
-                                  ClipboardData(
-                                    text: 'https://www.idp.com/cources',
-                                  ),
-                                );
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Copied')));
-                              },
-                              icon: const Icon(Icons.copy),
-                            )
-                          ],
-                        )
-                      ],
-                    );
-                  });
-            },
-            child: const Text('Cource Links')),
-        // Expanded(child: Container()),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(),
-          onPressed: () {
-            showModalBottomSheet<void>(
-              context: context,
-              builder: (context) {
-                return ListView(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 10,
-                  ),
-                  shrinkWrap: true,
-                  children: [
-                    Text(
-                      'Overview',
-                      style: TextStyle(fontSize: 20),
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "In this course, you will learn how to trade the Stock Market. It's a course designed for Complete Beginners and Intermediate market participants.We start off by covering basic concepts and work our way up to more advanced level material.By the end of this course, you will completely understand how the Stock Market works. You will understand what a Stock is, why you need a Broker, and what are Exchanges \n You will learn about Orders to buy and sell stocks and how they determine the price of a stock. Furthermore, you will get a list of Recommended Resources.We then cover Technical Analysis, including Charts and Candlesticks, Trends, Supports & Resistances, Chart Patterns, Volume, etc.",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    Text(
-                      'Instructor',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Text(
-                      'Piyus Goel',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Duration',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Text(
-                      '1.8 Hours',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                );
-              },
-            );
-          },
-          child: const Text('About Cource'),
-        )
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            //dynamic ActionChip to show three section when tap on any section on chip
+            //in statefulwidget state will change outside of chip and show  content of perticular area
+
+            ActionChip(
+              backgroundColor: Colors.blue,
+              label: const Text('Overview'),
+              onPressed: () {},
+            ),
+            ActionChip(label: const Text('Details'), onPressed: () {}),
+            ActionChip(label: const Text('Instructor'), onPressed: () {}),
+          ],
+        ),
+        const Text(
+          'Overview',
+          style: TextStyle(fontSize: 20),
+          textAlign: TextAlign.left,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        const Text(
+          "In this course, you will learn how to trade the Stock Market. It's a course designed for Complete Beginners and Intermediate market participants.We start off by covering basic concepts and work our way up to more advanced level material.By the end of this course, you will completely understand how the Stock Market works. You will understand what a Stock is, why you need a Broker, and what are Exchanges \n You will learn about Orders to buy and sell stocks and how they determine the price of a stock. Furthermore, you will get a list of Recommended Resources.We then cover Technical Analysis, including Charts and Candlesticks, Trends, Supports & Resistances, Chart Patterns, Volume, etc.",
+          style: TextStyle(fontSize: 14),
+        ),
+        const Text(
+          'Instructor',
+          style: TextStyle(fontSize: 20),
+        ),
+        const Text(
+          'Piyus Goel',
+          style: TextStyle(fontSize: 14),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        const Text(
+          'Duration',
+          style: TextStyle(fontSize: 20),
+        ),
+        const Text(
+          '1.8 Hours',
+          style: TextStyle(fontSize: 14),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
       ],
     );
   }
 }
+
+class TabWidget extends StatelessWidget {
+  const TabWidget({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return Tab(
+      child: Text(
+        title,
+        style: const TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+      ),
+    );
+  }
+}
+
+// class LinkAndAboutRowButton extends StatelessWidget {
+//   const LinkAndAboutRowButton({
+//     Key? key,
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       mainAxisAlignment: MainAxisAlignment.spaceAround,
+//       children: [
+//         TextButton(
+//             onPressed: () {
+//               showDialog(
+//                   context: context,
+//                   builder: (context) {
+//                     return SimpleDialog(
+//                       title: Text('Cource url'),
+//                       titleTextStyle: const TextStyle(color: Colors.green),
+//                       children: [
+//                         Row(
+//                           children: [
+//                             const Text('https://www.idp.com/cources'),
+//                             SizedBox(
+//                               width: 20,
+//                             ),
+//                             IconButton(
+//                               onPressed: () {
+//                                 Clipboard.setData(
+//                                   ClipboardData(
+//                                     text: 'https://www.idp.com/cources',
+//                                   ),
+//                                 );
+//                                 ScaffoldMessenger.of(context).showSnackBar(
+//                                     const SnackBar(content: Text('Copied')));
+//                               },
+//                               icon: const Icon(Icons.copy),
+//                             )
+//                           ],
+//                         )
+//                       ],
+//                     );
+//                   });
+//             },
+//             child: const Text('Cource Links')),
+//         // Expanded(child: Container()),
+//         ElevatedButton(
+//           style: ElevatedButton.styleFrom(),
+//           onPressed: () {
+//             showModalBottomSheet<void>(
+//               context: context,
+//               builder: (context) {
+//                 return ListView(
+//                   padding: const EdgeInsets.symmetric(
+//                     vertical: 10,
+//                     horizontal: 10,
+//                   ),
+//                   shrinkWrap: true,
+//                   children: [
+//                     Text(
+//                       'Overview',
+//                       style: TextStyle(fontSize: 20),
+//                       textAlign: TextAlign.left,
+//                     ),
+//                     SizedBox(
+//                       height: 10,
+//                     ),
+//                     Text(
+//                       "In this course, you will learn how to trade the Stock Market. It's a course designed for Complete Beginners and Intermediate market participants.We start off by covering basic concepts and work our way up to more advanced level material.By the end of this course, you will completely understand how the Stock Market works. You will understand what a Stock is, why you need a Broker, and what are Exchanges \n You will learn about Orders to buy and sell stocks and how they determine the price of a stock. Furthermore, you will get a list of Recommended Resources.We then cover Technical Analysis, including Charts and Candlesticks, Trends, Supports & Resistances, Chart Patterns, Volume, etc.",
+//                       style: TextStyle(fontSize: 14),
+//                     ),
+//                     Text(
+//                       'Instructor',
+//                       style: TextStyle(fontSize: 20),
+//                     ),
+//                     Text(
+//                       'Piyus Goel',
+//                       style: TextStyle(fontSize: 14),
+//                     ),
+//                     SizedBox(
+//                       height: 10,
+//                     ),
+//                     Text(
+//                       'Duration',
+//                       style: TextStyle(fontSize: 20),
+//                     ),
+//                     Text(
+//                       '1.8 Hours',
+//                       style: TextStyle(fontSize: 14),
+//                     ),
+//                     SizedBox(
+//                       height: 10,
+//                     ),
+//                   ],
+//                 );
+//               },
+//             );
+//           },
+//           child: const Text('About Cource'),
+//         )
+//       ],
+//     );
+//   }
+// }
 
 class BuildVideoView extends StatelessWidget {
   const BuildVideoView({
@@ -178,14 +303,14 @@ class BuildVideoView extends StatelessWidget {
     return BlocBuilder<VideoBloc, VideoControllerState>(
       builder: (context, state) {
         if (state is VideoControllerInitial) {
-          return Container(
-            height: 135,
+          return SizedBox(
+            height: 150,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: const [
                 Text(
-                  'start watching',
+                  'tap on lessions section and watch',
                   style: TextStyle(fontSize: 30),
                 ),
                 // Icon(
@@ -325,6 +450,38 @@ var videosLinks = [
   "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
 ];
 
+class LessionTestTile extends StatefulWidget {
+  const LessionTestTile({Key? key, required this.index}) : super(key: key);
+  final int index;
+  @override
+  State<LessionTestTile> createState() => _LessionTestTileState();
+}
+
+class _LessionTestTileState extends State<LessionTestTile> {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        onTap: () {
+          BlocProvider.of<VideoBloc>(context)
+              .add(NextVideo(videosLinks[widget.index]));
+        },
+        leading: Card(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(5),
+            child: Image.network(courceUrl),
+          ),
+        ),
+        title: const Text('how to create facebook ads from dashboard'),
+        subtitle: const Text(
+          '13:24',
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+    );
+  }
+}
+
 class LessionTile extends StatefulWidget {
   final int index;
   const LessionTile({
@@ -435,32 +592,6 @@ class _LessionTileState extends State<LessionTile> {
             // )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class AboutTabView extends StatelessWidget {
-  final CourceModel courceModel;
-  const AboutTabView({Key? key, required this.courceModel}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: CircleAvatar(
-              maxRadius: 60,
-              backgroundImage: NetworkImage(courceModel.courceUrl),
-            ),
-          ),
-          Text(
-            courceModel.courceName,
-            style: Theme.of(context).textTheme.headline6,
-          )
-        ],
       ),
     );
   }

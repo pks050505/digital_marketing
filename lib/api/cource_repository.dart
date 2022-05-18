@@ -6,7 +6,7 @@ class CourceRepository extends BaseApi {
   @override
   Future<List<CourceModel>?> getAllCources() async {
     try {
-      return Future.delayed(const Duration(seconds: 25)).then((value) {
+      return Future.delayed(const Duration(seconds: 2)).then((value) {
         return [
           CourceModel(
             courceId: 'courceId1',
@@ -82,7 +82,7 @@ class CourceRepository extends BaseApi {
   @override
   Future<List<CourceModel>?> trandingCources() async {
     try {
-      return Future.delayed(const Duration(seconds: 6)).then((value) {
+      return Future.delayed(const Duration(seconds: 3)).then((value) {
         return <CourceModel>[
           CourceModel(
             courceId: 'courceId1',

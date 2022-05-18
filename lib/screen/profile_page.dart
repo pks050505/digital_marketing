@@ -23,26 +23,24 @@ class ProfilePage extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           children: [
-            SizedBox(
-              height: 100,
-            ),
+            const SizedBox(height: 100),
             Card(
               margin: const EdgeInsets.all(20),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Column(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       backgroundImage: NetworkImage(
                         "https://randomuser.me/api/portraits/men/47.jpg",
                       ),
                       radius: 50.0,
                     ),
-                    Text(
+                    const Text(
                       "Pankaj",
                       style: TextStyle(fontSize: 16),
                     ),
-                    Text(
+                    const Text(
                       "pankajjoshi699@gmail.com",
                       style: TextStyle(fontSize: 16),
                     ),
@@ -96,18 +94,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
-            TextButton(
-              onPressed: () {
-                Clipboard.setData(
-                  ClipboardData(
-                    text: 'refferal link',
-                  ),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('refferal link Copied')));
-              },
-              child: const Text('copy your referal link'),
-            ),
+
             FractionallySizedBox(
               widthFactor: 0.7,
               child: TextButton(

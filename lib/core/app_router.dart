@@ -6,6 +6,8 @@ import 'package:digital_marketing/welcomepage.dart';
 
 import 'package:flutter/material.dart';
 
+import '../screen/detail_page.dart';
+
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     print(settings.name);
@@ -19,6 +21,9 @@ class AppRouter {
       // case CourceDetailPage.routeName:
       //   return CourceDetailPage.route(
       //       cource: settings.arguments as CourceModel);
+      case CourceDetail.routeName:
+        return CourceDetail.route(
+            courceModel: settings.arguments as CourceModel);
       case CourceDetailScreen.routeName:
         return CourceDetailScreen.route(
             courceModel: settings.arguments as CourceModel);

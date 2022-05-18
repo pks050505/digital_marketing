@@ -8,13 +8,11 @@ import 'package:digital_marketing/bloc/onboard/onboard_cubit.dart';
 import 'package:digital_marketing/bloc/trendingcource/trendincource_bloc.dart';
 import 'package:digital_marketing/bloc_observer.dart';
 import 'package:digital_marketing/core/app_router.dart';
-import 'package:digital_marketing/demopage.dart';
 import 'package:digital_marketing/screen/onboarding/onboard_page.dart';
 import 'package:digital_marketing/service/cource_service.dart';
 import 'package:digital_marketing/welcomepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api/auth_repository.dart';
 import 'injection_container.dart' as di;
@@ -106,14 +104,14 @@ class _AppViewState extends State<AppView> {
       title: 'Digital Marketing App',
       debugShowCheckedModeBanner: false,
 
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-        textTheme: GoogleFonts.robotoTextTheme(),
-      ),
+      // theme: ThemeData(
+      //   primarySwatch: Colors.pink,
+      //   textTheme: GoogleFonts.robotoTextTheme(),
+      // ),
 
       // darkTheme: ThemeData.dark(),
-      home: Scaffold(body: NewCourceTile()),
-      //  home: seenOnboard! ? const WelcomePage() : const OnBoardingPage(),
+      // home: Scaffold(body: NewCourceTile()),
+      home: seenOnboard! ? const WelcomePage() : const OnBoardingPage(),
       onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }
